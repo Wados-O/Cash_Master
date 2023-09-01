@@ -35,4 +35,10 @@ public class RecordOperation {
 
     System.out.println("Запись успешно создана.");
   }
+  public static String stringLength(String str,int maxLength){
+    if (str.length()> maxLength){
+      return str.substring(0,maxLength);
+    }
+    return str;
+  }
 }
