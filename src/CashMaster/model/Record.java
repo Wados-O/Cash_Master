@@ -1,6 +1,7 @@
 package CashMaster.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Record {
@@ -33,9 +34,9 @@ public class Record {
     return category;
   }
 
-//  public void setCategory(String category) {
-//    this.category = category;
-//  }
+  public void setCategory(String category) {
+    this.category = category;
+  }
 
   public String getComment() {
     return comment;
@@ -60,7 +61,15 @@ public class Record {
   public void setDate(Date date) {
     this.date = date;
   }
-
+public static int getNewId(List<Record> records){
+    int max = 1;
+    for (Record record : records){
+      if (record.getId() >= max){
+        max = record.getId() +1;
+      }
+    }
+    return max;
+}
   @Override
   public String toString() {
     return "Record{" +
