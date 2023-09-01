@@ -15,6 +15,10 @@ public class Category {
     this.allowed = allowed;
   }
 
+  public Category(String title) {
+    this.title = title;
+  }
+
   public int getId() {
     return id;
   }
@@ -31,8 +35,7 @@ public class Category {
     return categories;
   }
 
-  public Category() {
-  }
+
 
   public static List<Category> categories = new ArrayList<>();
 
