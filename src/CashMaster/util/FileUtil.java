@@ -1,5 +1,6 @@
 package CashMaster.util;
 
+import CashMaster.model.Category;
 import CashMaster.model.Record;
 import java.io.File;
 import java.io.IOException;
@@ -8,9 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileUtil {
-  private static String saveFile = "res/records.csv";
+  private static String saveFile = "res/record.csv";
   private static List<Record> records = new ArrayList<>();
-  private static final String SEP = ";;";
+  private static final String SEP = ";;;";
 
   public static void readFile()throws IOException {
     File file = new File(saveFile);
