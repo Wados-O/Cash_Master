@@ -3,8 +3,10 @@ package CashMaster.util;
 import CashMaster.model.Category;
 import CashMaster.model.Record;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,12 +38,24 @@ public class FileUtil {
           double amount = Double.parseDouble(parts[3]);
           Date date = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(parts[4]);
 
-          Category category = new Category(categoryTitle); // Assuming you have a Category constructor that takes a title
+          Category category = new Category(categoryTitle);
           Record record = new Record(id, category, comment, amount, date);
           records.add(record);
         }
       }
     }
   }
-
+  public static void saveToFile(List<Record> records) throws IOException {
+    try (BufferedWriter bw = new BufferedWriter(new FileWriter(saveFile))) {
+      for (Record record : records) {
+        String line = record.getId() + SEP +
+            record.getCategory().getTitle() + SEP +
+            record.getComment() + SEP +
+            record.getAmount() + SEP +
+            new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).format(record.getDate());
+        bw.write(line);
+        bw.newLine();
+      }
+    }
+  }
 }
