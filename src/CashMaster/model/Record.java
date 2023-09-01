@@ -19,7 +19,12 @@ public class Record {
     this.date = date;
   }
 
+  public Record(int id) {
+    this.id = id;
+  }
+
   public Record() {
+
   }
 
   public int getId() {
