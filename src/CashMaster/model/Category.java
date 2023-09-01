@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
-
   private int id;
   private String title;
   private boolean allowed;
@@ -15,8 +14,7 @@ public class Category {
     this.allowed = allowed;
   }
 
-  public Category(String title) {
-    this.title = title;
+  public Category() {
   }
 
   public int getId() {
