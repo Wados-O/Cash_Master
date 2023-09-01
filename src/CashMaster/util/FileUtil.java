@@ -59,4 +59,12 @@ public class FileUtil {
       }
     }
   }
+
+  public static void setSaveFile(String saveFile) {
+    FileUtil.saveFile = saveFile;
+  }
+
+  public static List<Record> getRecords() {
+    return records;
+  }
 }
