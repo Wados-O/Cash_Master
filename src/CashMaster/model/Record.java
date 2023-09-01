@@ -1,15 +1,16 @@
 package CashMaster.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Record {
   private int id;
-  private Category category;
+  private String category;
   private String comment;
   private double amount;
   private Date date;
 
-  public Record(int id, Category category, String comment, double amount, Date date) {
+  public Record(int id,String category, String comment, double amount, Date date) {
     this.id = id;
     this.category = category;
     this.comment = comment;
@@ -28,7 +29,7 @@ public class Record {
     this.id = id;
   }
 
-  public Category getCategory() {
+  public String getCategory() {
     return category;
   }
 
@@ -58,5 +59,35 @@ public class Record {
 
   public void setDate(Date date) {
     this.date = date;
+  }
+
+  @Override
+  public String toString() {
+    return "Record{" +
+        "id=" + id +
+        ", category=" + category +
+        ", comment='" + comment + '\'' +
+        ", amount=" + amount +
+        ", date=" + date +
+        '}';
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    Record record = (Record) obj;
+    return id == record.id && Double.compare(record.amount, amount) == 0
+        && Objects.equals(category, record.category) && Objects.equals(comment,
+        record.comment) && Objects.equals(date, record.date);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, category, comment, amount, date);
   }
 }

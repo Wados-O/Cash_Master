@@ -17,6 +17,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class FileUtil {
+
   private static String saveFile = "res/record.csv";
   private static List<Record> records = new ArrayList<>();
   private static final String SEP = ";;;";
@@ -33,23 +34,23 @@ public class FileUtil {
         String[] parts = line.split(SEP);
         if (parts.length == 5) {
           int id = Integer.parseInt(parts[0]);
-          String categoryTitle = parts[1];
+          String category = parts[1]; // Читаем категорию как строку
           String comment = parts[2];
           double amount = Double.parseDouble(parts[3]);
           Date date = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(parts[4]);
 
-          Category category = new Category(categoryTitle);
           Record record = new Record(id, category, comment, amount, date);
           records.add(record);
         }
       }
     }
   }
+
   public static void saveToFile(List<Record> records) throws IOException {
     try (BufferedWriter bw = new BufferedWriter(new FileWriter(saveFile))) {
       for (Record record : records) {
         String line = record.getId() + SEP +
-            record.getCategory().getTitle() + SEP +
+            record.getCategory() + SEP + // Используем id категории вместо title
             record.getComment() + SEP +
             record.getAmount() + SEP +
             new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).format(record.getDate());
