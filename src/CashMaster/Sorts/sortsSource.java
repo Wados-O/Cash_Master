@@ -50,4 +50,18 @@ public class sortsSource {
         .collect(Collectors.toList());
     return result;
   }
+  /**
+   * Sort LIst of All Records by Comment
+   *
+   * @param records List of Record with payments
+   * @return new sorted LIst of Records
+   */
+
+  public static List<Record> sortByComment(List<Record> records) {
+    List<Record> result;
+    result = records.stream()
+        .sorted(Comparator.comparing(Record::getComment))
+        .collect(Collectors.toList());
+    return result;
+  }
 }
