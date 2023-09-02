@@ -8,6 +8,7 @@ import CashMaster.util.FileUtil;
 import CashMaster.util.InputUtil;
 import CashMaster.view.MenuButton;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class MenuController {
   static List<Record> records = FileUtil.getRecords();
 
 
-  public static void mainMenu(Scanner sc) throws IOException {
+  public static void mainMenu(Scanner sc) throws IOException, ParseException {
     boolean isRun = true;
     while (isRun) {
       System.out.println(MenuButton.SHOW_FIRST_MENU);

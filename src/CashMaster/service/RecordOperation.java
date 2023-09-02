@@ -1,6 +1,6 @@
 package CashMaster.service;
 
-import static CashMaster.util.DateUtil.parseDate;
+
 import static CashMaster.view.PrintTable.FOOTER;
 import static CashMaster.view.PrintTable.HEADER;
 import static CashMaster.view.PrintTable.MIDDLE;
@@ -10,6 +10,7 @@ import CashMaster.model.Record;
 import CashMaster.util.DateUtil;
 import CashMaster.util.FileUtil;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -20,7 +21,7 @@ public class RecordOperation {
   static List<Record> records = FileUtil.getRecords();
   static List<Category> categories = Category.createCategories();
  static Record record = new Record();
-  public static void createRecord(Scanner scanner) {
+  public static void createRecord(Scanner scanner) throws ParseException {
     System.out.println("Создание новой записи:");
 
     // Получите данные от пользователя
@@ -51,7 +52,7 @@ public class RecordOperation {
 
     System.out.print("Введите дату (dd.MM.yyyy): ");
     String dateStr = scanner.next();
-    Date date = parseDate(dateStr);
+    Date date = DateUtil.parseStrToDate(dateStr);
 
     // Создайте объект Record с полученными данными
     Record record = new Record(Record.getNewId(records), category, comment, amount, date);
@@ -81,13 +82,13 @@ public class RecordOperation {
           category != null ? category.getTitle() : "Unknown",
           record.getComment(),
           record.getAmount(),
-          formattedDate);
+          DateUtil.parseDateStr(record.getDate()));
       System.out.println(recordRow);
       System.out.println(MIDDLE);
     }
     System.out.println(FOOTER);
   }
-  public static void updateRecord(Scanner scanner) {
+  public static void updateRecord(Scanner scanner) throws ParseException {
     System.out.println("Изменение записи:");
 
     // Получите идентификатор записи, которую пользователь хочет изменить
@@ -147,7 +148,7 @@ public class RecordOperation {
       case 4:
         System.out.print("Введите новую дату (dd.MM.yyyy): ");
         String newDateStr = scanner.next();
-        Date newDate = parseDate(newDateStr);
+        Date newDate = DateUtil.parseStrToDate(newDateStr);
         recordToUpdate.setDate(newDate);
         break;
       default:

@@ -28,4 +28,21 @@ public class DateUtil {
         Colors.YELLOW + "Неверный формат даты. Используйте [dd.MM.yyyy]." + Colors.RESET);
     return null;
   }
+  public static Date parseStrToDate(String string)throws ParseException{
+    SimpleDateFormat[] dateFormats = {
+        new SimpleDateFormat("dd-MM-yyyy"),
+        new SimpleDateFormat("dd,MM,yyyy"),
+        new SimpleDateFormat("dd/MM/yyyy"),
+        new SimpleDateFormat("dd.MM.yyyy")
+    };
+    for (SimpleDateFormat dateFormat : dateFormats){
+      try{
+        dateFormat.setLenient(false);
+        return dateFormat.parse(string);
+      }catch (ParseException e){
+
+      }
+    }
+    throw new ParseException("Неверный формат даты.",0);
+  }
 }
