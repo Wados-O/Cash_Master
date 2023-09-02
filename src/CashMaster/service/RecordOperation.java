@@ -9,6 +9,7 @@ import CashMaster.model.Category;
 import CashMaster.model.Record;
 import CashMaster.util.DateUtil;
 import CashMaster.util.FileUtil;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -158,29 +159,15 @@ public class RecordOperation {
     System.out.println("Запись успешно изменена.");
   }
 
-  public static void deleteRecord(Scanner scanner) {
+  public static void deleteRecord(List<Record> records)throws IOException {
     System.out.println("Удаление записи:");
-
+Scanner scanner = new Scanner(System.in);
     // Получите идентификатор записи, которую пользователь хочет удалить
     System.out.print("Введите идентификатор записи для удаления: ");
     int recordId = scanner.nextInt();
 
-    // Поиск записи по идентификатору и удаление ее, если она найдена
-    Record recordToRemove = null;
-    for (Record record : records) {
-      if (record.getId() == recordId) {
-        recordToRemove = record;
-        break;
-      }
-    }
-
-    // Проверка, найдена ли запись для удаления
-    if (recordToRemove != null) {
-      records.remove(recordToRemove);
-      System.out.println("Запись успешно удалена.");
-    } else {
-      System.out.println("Запись с указанным идентификатором не найдена.");
-    }
+    records.removeIf(record -> record.getId() ==recordId );
+    System.out.println("Запись успешно удалена");
   }
   private static Category getCategoryById(String categoryId) {
     for (Category category : categories) {

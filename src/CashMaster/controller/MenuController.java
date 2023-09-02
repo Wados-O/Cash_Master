@@ -31,7 +31,7 @@ public class MenuController {
           RecordOperation.updateRecord(sc);
           break;
         case 3:
-          RecordOperation.deleteRecord(sc);
+          RecordOperation.deleteRecord(records);
           //todo delete records
           break;
         case 4:
