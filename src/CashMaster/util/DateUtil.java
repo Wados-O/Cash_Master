@@ -6,29 +6,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateUtil {
-  public static Date parseDate(String dateStr) {
-    SimpleDateFormat dateFormatDash = new SimpleDateFormat("dd-MM-yyyy");
-    SimpleDateFormat dateFormatComa = new SimpleDateFormat("dd,MM,yyyy");
-    SimpleDateFormat dateFormatSlash = new SimpleDateFormat("dd/MM/yyyy");
-    SimpleDateFormat dateFormatDot = new SimpleDateFormat("dd.MM.yyyy");
+  public static String parseDateStr(Date date) {
+    SimpleDateFormat[] dateFormats = {
+        new SimpleDateFormat("dd-MM-yyyy"),
+        new SimpleDateFormat("dd,MM,yyyy"),
+        new SimpleDateFormat("dd/MM/yyyy"),
+        new SimpleDateFormat("dd.MM.yyyy")
+    };
 
-    try {
-      if (dateStr.contains("-")) {
-        return dateFormatDash.parse(dateStr);
-      } else if (dateStr.contains(".")) {
-        return dateFormatDot.parse(dateStr);
-      } else if (dateStr.contains(",")) {
-        return dateFormatComa.parse(dateStr);
-      } else if (dateStr.contains("/")) {
-        return dateFormatSlash.parse(dateStr);
-      } else {
-        System.out.println(
-            Colors.YELLOW + "Неверный формат даты. Используйте [dd.MM.yyyy]." + Colors.RESET);
-        return null;
+    for (SimpleDateFormat dateFormat : dateFormats) {
+      try {
+        String formattedDate = dateFormat.format(date);
+        // Если форматирование прошло успешно, возвращаем полученную строку
+        return formattedDate;
+      } catch (Exception e) {
+        // Продолжаем итерироваться по форматам, если текущий не подходит
       }
-    } catch (ParseException e) {
-      e.printStackTrace();
-      return null;
     }
+
+    System.out.println(
+        Colors.YELLOW + "Неверный формат даты. Используйте [dd.MM.yyyy]." + Colors.RESET);
+    return null;
   }
 }
