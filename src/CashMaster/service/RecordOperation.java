@@ -3,14 +3,15 @@ package CashMaster.service;
 import static CashMaster.util.DateUtil.parseDate;
 
 import CashMaster.model.Record;
+import CashMaster.util.FileUtil;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class RecordOperation {
-  private static List<Record> records;
+  private static List<Record> records = FileUtil.getRecords();
   private static Record record = new Record();
-  private static void createRecord(Scanner scanner) {
+  public static void createRecord(Scanner scanner) {
     System.out.println("Создание новой записи:");
 
     // Получите данные от пользователя
@@ -32,7 +33,6 @@ public class RecordOperation {
 
     // Добавьте запись в список records
     records.add(record);
-
     System.out.println("Запись успешно создана.");
   }
   public static String stringLength(String str,int maxLength){
