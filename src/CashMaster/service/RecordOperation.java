@@ -1,6 +1,9 @@
 package CashMaster.service;
 
 import static CashMaster.util.DateUtil.parseDate;
+import static CashMaster.view.PrintTable.FOOTER;
+import static CashMaster.view.PrintTable.HEADER;
+import static CashMaster.view.PrintTable.MIDDLE;
 
 import CashMaster.model.Category;
 import CashMaster.model.Record;
@@ -47,5 +50,15 @@ public class RecordOperation {
       return str.substring(0,maxLength);
     }
     return str;
+  }
+  public static void printList(List<Record> records){
+    System.out.println(HEADER);
+    for (Record record : records){
+      String recordRow = String.format("│%6d│%24s│%25s│%22s│%24.2f│",
+          record.getId(),record.getCategory(),record.getComment(),record.getAmount(),record.getDate());
+      System.out.println(recordRow);
+      System.out.println(MIDDLE);
+    }
+    System.out.println(FOOTER);
   }
 }
