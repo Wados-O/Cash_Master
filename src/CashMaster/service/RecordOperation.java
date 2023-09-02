@@ -77,7 +77,7 @@ public class RecordOperation {
 
       String formattedDate = dateFormat.format(record.getDate());
 
-      String recordRow = String.format("│%-6d│%-20s│%-31s│%-20s│%-19s│",
+      String recordRow = String.format("│%-6d│%-29s│%-31s│%-30s│%-28s│",
           i + 1,
           category != null ? category.getTitle() : "Unknown",
           record.getComment(),
