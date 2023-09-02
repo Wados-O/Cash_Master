@@ -60,5 +60,10 @@ public class Category {
     categories.add(c9);
     return categories;
   }
+  public static void printCategories() {
+    for (Category category : categories) {
+      System.out.println(category.getId() + ". " + category.getTitle());
+    }
+  }
 
 }

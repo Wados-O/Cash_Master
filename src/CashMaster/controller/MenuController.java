@@ -1,9 +1,12 @@
 package CashMaster.controller;
 
+import CashMaster.model.Category;
+import CashMaster.model.Record;
 import CashMaster.service.RecordOperation;
 import CashMaster.service.RecordsService;
 import CashMaster.util.InputUtil;
 import CashMaster.view.MenuButton;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuController {

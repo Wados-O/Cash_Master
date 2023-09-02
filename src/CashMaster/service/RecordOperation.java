@@ -2,6 +2,7 @@ package CashMaster.service;
 
 import static CashMaster.util.DateUtil.parseDate;
 
+import CashMaster.model.Category;
 import CashMaster.model.Record;
 import CashMaster.util.FileUtil;
 import java.util.Date;
@@ -10,12 +11,18 @@ import java.util.Scanner;
 
 public class RecordOperation {
   private static List<Record> records = FileUtil.getRecords();
+  private static List<Category> categories = Category.createCategories();
   private static Record record = new Record();
   public static void createRecord(Scanner scanner) {
     System.out.println("Создание новой записи:");
 
     // Получите данные от пользователя
     System.out.print("Введите категорию: ");
+    System.out.println();
+    for (int i = 0; i < categories.size(); i++) {
+
+      System.out.println("" + (i +1) + " "+ categories.get(i).getTitle());
+    }
     String category = scanner.next();
 
     System.out.print("Введите комментарий: ");
