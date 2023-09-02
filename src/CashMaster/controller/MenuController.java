@@ -12,10 +12,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MenuController {
- static List<Record> records = FileUtil.getRecords();
+
+  static List<Record> records = FileUtil.getRecords();
+
+
   public static void mainMenu(Scanner sc) throws IOException {
     boolean isRun = true;
-    while (true) {
+    while (isRun) {
       System.out.println(MenuButton.SHOW_FIRST_MENU);
       RecordOperation.printList(records);
       int choice = InputUtil.readIntLimited(1, 5);
@@ -25,9 +28,10 @@ public class MenuController {
           RecordOperation.createRecord(sc);
           break;
         case 2:
-          //todo change records
+          RecordOperation.updateRecord(sc);
           break;
         case 3:
+          RecordOperation.deleteRecord(sc);
           //todo delete records
           break;
         case 4:
@@ -40,7 +44,10 @@ public class MenuController {
     }
   }
 
-  public static void sortRecords() {
+  public static void sortRecords(Scanner sc) throws IOException {
+    while (true) {
+
+    }
 
   }
 
