@@ -37,7 +37,8 @@ public class FileUtil {
           String category = parts[1]; // Читаем категорию как строку
           String comment = parts[2];
           double amount = Double.parseDouble(parts[3]);
-          Date date = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(parts[4]);
+
+          Date date = new SimpleDateFormat("dd.MM.yyyy").parse(parts[4]);
 
           Record record = new Record(id, category, comment, amount, date);
           records.add(record);

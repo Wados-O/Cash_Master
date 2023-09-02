@@ -7,15 +7,17 @@ import static CashMaster.view.PrintTable.MIDDLE;
 
 import CashMaster.model.Category;
 import CashMaster.model.Record;
+import CashMaster.util.DateUtil;
 import CashMaster.util.FileUtil;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class RecordOperation {
-  private static List<Record> records = FileUtil.getRecords();
-  private static List<Category> categories = Category.createCategories();
-  private static Record record = new Record();
+  static List<Record> records = FileUtil.getRecords();
+  static List<Category> categories = Category.createCategories();
+ static Record record = new Record();
   public static void createRecord(Scanner scanner) {
     System.out.println("Создание новой записи:");
 
@@ -54,7 +56,7 @@ public class RecordOperation {
   public static void printList(List<Record> records){
     System.out.println(HEADER);
     for (Record record : records){
-      String recordRow = String.format("│%6d│%24s│%25s│%22s│%24.2f│",
+      String recordRow = String.format("│%6d│%20s│%31s│%20s│%24s│",
           record.getId(),record.getCategory(),record.getComment(),record.getAmount(),record.getDate());
       System.out.println(recordRow);
       System.out.println(MIDDLE);

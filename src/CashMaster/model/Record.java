@@ -36,7 +36,7 @@ public class Record {
   }
 
   public String getCategory() {
-    return category;
+    return Category.getTitle();
   }
 
   public void setCategory(String category) {

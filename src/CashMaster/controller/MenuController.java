@@ -17,6 +17,7 @@ public class MenuController {
     boolean isRun = true;
     while (true) {
       System.out.println(MenuButton.SHOW_FIRST_MENU);
+      RecordOperation.printList(records);
       int choice = InputUtil.readIntLimited(1, 5);
 
       switch (choice) {

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Category {
   private int id;
-  private String title;
+  private static String title;
   private boolean allowed;
 
   public Category(int id, String title, boolean allowed) {
@@ -21,7 +21,7 @@ public class Category {
     return id;
   }
 
-  public String getTitle() {
+  public static String getTitle() {
     return title;
   }
 
