@@ -10,8 +10,10 @@ import CashMaster.model.Record;
 import CashMaster.util.DateUtil;
 import CashMaster.util.FileUtil;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -21,14 +23,74 @@ public class RecordOperation {
   static List<Record> records = FileUtil.getRecords();
   static List<Category> categories = Category.createCategories();
  static Record record = new Record();
+  public static void addRecord(List<Record> records, List<Category> categories) throws IOException, ParseException {
+    Scanner sc = new Scanner(System.in);
+    DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    Record record = new Record();
+
+    Calendar today = Calendar.getInstance();
+    Date currentDate = today.getTime();
+    Date stDate = currentDate;
+
+    String incomeCategory = "INCOME";
+    boolean income = false;
+    int multiply = 1;
+    int id = Record.getNewId(records);
+
+    System.out.println("RECORD ID: " + id);
+    System.out.println("Income or expenses:");
+    System.out.println("Income 1 | Expenses 2");
+    String incOrExp = sc.nextLine();
+    if (incOrExp.equalsIgnoreCase("1")) {
+      income = true;
+    }
+    if (!income) {
+      for (int i = 0; i < categories.size(); ++i) {
+        System.out.println("" + i + " " + categories.get(i).getTitle());
+      }
+      System.out.print("Choose category from list (0-9): ");
+      int cat = Integer.parseInt(sc.nextLine());
+      incomeCategory = categories.get(cat).getTitle();
+    }
+    System.out.println("Enter comment:");
+    String comment = sc.nextLine();
+
+    System.out.println("Input amount:");
+    double amount = Double.parseDouble(sc.nextLine());
+
+    System.out.println("Current date: " + dateFormat.format(currentDate));
+    System.out.print("Input Date or 'ENTER' for current date (dd.MM.yyyy): ");
+    String startDate = sc.nextLine();
+    if (!startDate.isEmpty()) {
+      try {
+        stDate = dateFormat.parse(startDate);
+      } catch (ParseException e) {
+        System.out.println("Invalid date format. Please use dd.MM.yyyy format.");
+        // Handle the exception or ask the user to input the date again.
+        return; // Exit the method.
+      }
+    }
+
+    record.setId(id);
+    record.setCategory(incomeCategory);
+    record.setComment(comment);
+    if (!income) {
+      amount *= -1;
+    }
+    record.setAmount(amount);
+    record.setDate(stDate);
+    records.add(record);
+    FileUtil.saveToFile(records);
+  }
+
   public static void createRecord(Scanner scanner) throws ParseException {
     System.out.println("Создание новой записи:");
 
     // Получите данные от пользователя
     System.out.print("Введите категорию: ");
     System.out.println();
-    for (int i = 0; i < categories.size(); i++) {
-      System.out.println("" + (i + 1) + " " + categories.get(i).getTitle());
+    for (int i = 1; i < categories.size(); i++) {
+      System.out.println("" + i  + " " + categories.get(i).getTitle());
     }
     String category = scanner.next();
     scanner.nextLine();
@@ -79,7 +141,7 @@ public class RecordOperation {
 
       String recordRow = String.format("│%-6d│%-29s│%-31s│%-30s│%-28s│",
           i + 1,
-          category != null ? category.getTitle() : "Unknown",
+          category != null ? category.getTitle() : "Income",
           record.getComment(),
           record.getAmount(),
           DateUtil.parseDateStr(record.getDate()));

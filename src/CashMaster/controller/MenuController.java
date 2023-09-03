@@ -16,6 +16,7 @@ import java.util.Scanner;
 public class MenuController {
 
   static List<Record> records = FileUtil.getRecords();
+  static List<Category> categories = Category.createCategories();
 
 
   public static void mainMenu(Scanner sc) throws IOException, ParseException {
@@ -28,7 +29,7 @@ public class MenuController {
 
       switch (choice) {
         case 1:
-          RecordOperation.createRecord(sc);
+          RecordOperation.addRecord(records,categories);
           break;
         case 2:
           RecordOperation.updateRecord(sc);
