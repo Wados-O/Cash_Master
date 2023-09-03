@@ -24,6 +24,7 @@ public class RecordOperation {
   static List<Category> categories = Category.createCategories();
  static Record record = new Record();
   public static void addRecord(List<Record> records, List<Category> categories) throws IOException, ParseException {
+
     Scanner sc = new Scanner(System.in);
     DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     Record record = new Record();
@@ -45,7 +46,7 @@ public class RecordOperation {
       income = true;
     }
     if (!income) {
-      for (int i = 0; i < categories.size(); ++i) {
+      for (int i = 0; i < 10; ++i) {
         System.out.println("" + i + " " + categories.get(i).getTitle());
       }
       System.out.print("Choose category from list (0-9): ");
@@ -77,6 +78,7 @@ public class RecordOperation {
     if (!income) {
       amount *= -1;
     }
+    amount *= multiply;
     record.setAmount(amount);
     record.setDate(stDate);
     records.add(record);
