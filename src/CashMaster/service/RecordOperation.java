@@ -88,6 +88,7 @@ public class RecordOperation {
     }
     System.out.println(FOOTER);
   }
+
   public static void updateRecord(Scanner scanner) throws ParseException {
     System.out.println("Изменение записи:");
 
@@ -165,9 +166,9 @@ public class RecordOperation {
 Scanner scanner = new Scanner(System.in);
     // Получите идентификатор записи, которую пользователь хочет удалить
     System.out.print("Введите идентификатор записи для удаления: ");
-    int recordId = scanner.nextInt();
+    int recordId = scanner.nextInt() -1;
 
-    records.removeIf(record -> record.getId() ==recordId );
+    records.removeIf(record -> record.getId() ==recordId  );
     System.out.println("Запись успешно удалена");
   }
   private static Category getCategoryById(String categoryId) {

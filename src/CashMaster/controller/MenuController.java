@@ -21,8 +21,9 @@ public class MenuController {
   public static void mainMenu(Scanner sc) throws IOException, ParseException {
     boolean isRun = true;
     while (isRun) {
-      System.out.println(MenuButton.SHOW_FIRST_MENU);
+
       RecordOperation.printList(records);
+      System.out.println(MenuButton.SHOW_FIRST_MENU);
       int choice = InputUtil.readIntLimited(1, 5);
 
       switch (choice) {
@@ -49,8 +50,8 @@ public class MenuController {
 
   public static void sortRecords(Scanner sc) throws IOException, ParseException {
     while (true) {
-      System.out.println(MenuButton.SHOW_SORT_MENU);
       RecordOperation.printList(records);
+      System.out.println(MenuButton.SHOW_SORT_MENU);
       int choice = sc.nextInt();
       switch (choice) {
         case 1:
