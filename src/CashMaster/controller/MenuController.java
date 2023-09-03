@@ -1,5 +1,6 @@
 package CashMaster.controller;
 
+import CashMaster.Sorts.SortsSource;
 import CashMaster.model.Category;
 import CashMaster.model.Record;
 import CashMaster.service.RecordOperation;
@@ -37,6 +38,7 @@ public class MenuController {
           break;
         case 4:
           //todo sort menu;
+          sortRecords(sc);
           break;
         case 5:
           FileUtil.saveToFile(records);
@@ -45,19 +47,26 @@ public class MenuController {
     }
   }
 
-  public static void sortRecords(Scanner sc) throws IOException {
+  public static void sortRecords(Scanner sc) throws IOException, ParseException {
     while (true) {
+      System.out.println(MenuButton.SHOW_SORT_MENU);
+      RecordOperation.printList(records);
       int choice = sc.nextInt();
       switch (choice) {
         case 1:
+          SortsSource.sortByCategory(records);
           break;
         case 2:
+          SortsSource.sortByComment(records);
           break;
         case 3:
+          SortsSource.sortByAmount(records);
           break;
         case 4:
+          SortsSource.sortByDate(records);
           break;
         case 5:
+          mainMenu(sc);
           break;
       }
     }
