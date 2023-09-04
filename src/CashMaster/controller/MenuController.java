@@ -24,6 +24,7 @@ public class MenuController {
 
       RecordOperation.printList(records);
       System.out.println(MenuButton.SHOW_FIRST_MENU);
+      RecordOperation.calcTotalAmount(records);
       int choice = InputUtil.readIntLimited(1, 5);
 
       switch (choice) {

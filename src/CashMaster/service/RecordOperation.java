@@ -194,4 +194,21 @@ public class RecordOperation {
     }
     return null;
   }
+
+
+  public static void calcTotalAmount(List<Record> records) {
+    double totalIncome = 0.0;
+    double totalExpenses = 0.0;
+
+    for (Record record : records) {
+      if (record.getAmount() > 0) {
+        totalIncome += record.getAmount();
+      } else {
+        totalExpenses += record.getAmount();
+      }
+    }
+
+    System.out.println("Total Income: " + totalIncome);
+    System.out.println("Total Expenses: " + Math.abs(totalExpenses)); // Используйте Math.abs для получения положительной суммы расходов
+  }
 }
