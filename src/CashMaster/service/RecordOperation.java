@@ -208,7 +208,20 @@ public class RecordOperation {
       }
     }
 
-    System.out.println("Total Income: " + totalIncome);
+    System.out.println("Total Income: " + calculateTotalIncome(records));
     System.out.println("Total Expenses: " + Math.abs(totalExpenses)); // Используйте Math.abs для получения положительной суммы расходов
   }
+  public static double calculateTotalIncome(List<Record> records){
+    double totalIncome = 0.0;
+    for (Record record : records){
+      if (record.getAmount()>0){
+        totalIncome+= record.getAmount();
+      }
+    }
+    return totalIncome;
+  }
+  public static void printIncome(List<Record>records){
+    System.out.println("Total Income: " + calculateTotalIncome(records));
+  }
+
 }
