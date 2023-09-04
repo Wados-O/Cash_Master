@@ -39,19 +39,19 @@ public class RecordOperation {
     String incomeCategory = "INCOME";
     boolean income = false;
     int multiply = 1;
-    int id = 1;
+    int id = Record.getNewId(records);
 
-    if (!records.isEmpty()) {
-      // Создайте список, содержащий все существующие ID.
-      List<Integer> existingIds = records.stream()
-          .map(Record::getId)
-          .collect(Collectors.toList());
-
-      // Найдите минимальный доступный ID, начиная с 1.
-      while (existingIds.contains(id)) {
-        id++;
-      }
-    }
+//    if (!records.isEmpty()) {
+//      // Создайте список, содержащий все существующие ID.
+//      List<Integer> existingIds = records.stream()
+//          .map(Record::getId)
+//          .collect(Collectors.toList());
+//
+//      // Найдите минимальный доступный ID, начиная с 1.
+//      while (existingIds.contains(id)) {
+//        id++;
+//      }
+//    }
     System.out.println("RECORD ID: " + id);
     System.out.println("Income or expenses:");
     System.out.println("Income 1           |            Expenses 2");

@@ -3,15 +3,17 @@ package CashMaster.model;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Record {
+
   private int id;
   private String category;
   private String comment;
   private double amount;
   private Date date;
 
-  public Record(int id,String category, String comment, double amount, Date date) {
+  public Record(int id, String category, String comment, double amount, Date date) {
     this.id = id;
     this.category = category;
     this.comment = comment;
@@ -66,30 +68,22 @@ public class Record {
   public void setDate(Date date) {
     this.date = date;
   }
+
   public static int getNewId(List<Record> records) {
-    int max = 1;
-    boolean[] usedIds = new boolean[records.size() + 1]; // Создаем массив для отслеживания использованных ID
+    int id = 1;
+    if (!records.isEmpty()) {
+      // Создайте список, содержащий все существующие ID.
+      List<Integer> existingIds = records.stream()
+          .map(Record::getId)
+          .collect(Collectors.toList());
 
-    for (Record record : records) {
-      int id = record.getId();
-      if (id >= 1) {
-        usedIds[id] = true; // Отмечаем ID как использованный
-        if (id >= max) {
-          max = id + 1;
-        }
+      // Найдите минимальный доступный ID, начиная с 1.
+      while (existingIds.contains(id)) {
+        id++;
       }
-    }
-
-    // Находим первый доступный ID, начиная с 1
-    for (int i = 1; i <= records.size(); i++) {
-      if (!usedIds[i]) {
-        max = i;
-        break;
-      }
-    }
-
-    return max;
+    }return id;
   }
+
   @Override
   public String toString() {
     return "Record{" +
