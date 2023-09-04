@@ -1,6 +1,7 @@
 package CashMaster.service;
 
 
+import static CashMaster.view.Colors.RESET;
 import static CashMaster.view.PrintTable.FOOTER;
 import static CashMaster.view.PrintTable.HEADER;
 import static CashMaster.view.PrintTable.MIDDLE;
@@ -9,6 +10,7 @@ import CashMaster.model.Category;
 import CashMaster.model.Record;
 import CashMaster.util.DateUtil;
 import CashMaster.util.FileUtil;
+import CashMaster.view.Colors;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -254,9 +256,10 @@ public class RecordOperation {
     return  totalIncome + totalExpenses;
   }
   public static void printIncome(List<Record>records){
-    System.out.print("Total Income:    " + calculateTotalIncome(records) + "        |||||      ");
+    System.out.println();
+    System.out.print(Colors.WHITE_BRIGHT + "Total Income:    " + calculateTotalIncome(records) + "        |||||      ");
     System.out.print("Total Expenses:    " + calculateTotalExpenses(records)+"            |||||      ");
-    System.out.print("Balance:    " + calculateBalance(records));
+    System.out.print("Balance:    " + calculateBalance(records) + RESET);
     System.out.println();
   }
 
