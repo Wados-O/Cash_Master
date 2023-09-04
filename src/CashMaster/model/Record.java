@@ -66,15 +66,30 @@ public class Record {
   public void setDate(Date date) {
     this.date = date;
   }
-public static int getNewId(List<Record> records){
+  public static int getNewId(List<Record> records) {
     int max = 1;
-    for (Record record : records){
-      if (record.getId() >= max){
-        max = record.getId() +1;
+    boolean[] usedIds = new boolean[records.size() + 1]; // Создаем массив для отслеживания использованных ID
+
+    for (Record record : records) {
+      int id = record.getId();
+      if (id >= 1) {
+        usedIds[id] = true; // Отмечаем ID как использованный
+        if (id >= max) {
+          max = id + 1;
+        }
       }
     }
+
+    // Находим первый доступный ID, начиная с 1
+    for (int i = 1; i <= records.size(); i++) {
+      if (!usedIds[i]) {
+        max = i;
+        break;
+      }
+    }
+
     return max;
-}
+  }
   @Override
   public String toString() {
     return "Record{" +

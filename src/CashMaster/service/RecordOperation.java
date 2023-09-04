@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class RecordOperation {
   static List<Record> records = FileUtil.getRecords();
@@ -38,8 +39,19 @@ public class RecordOperation {
     String incomeCategory = "INCOME";
     boolean income = false;
     int multiply = 1;
-    int id = Record.getNewId(records);
+    int id = 1;
 
+    if (!records.isEmpty()) {
+      // Создайте список, содержащий все существующие ID.
+      List<Integer> existingIds = records.stream()
+          .map(Record::getId)
+          .collect(Collectors.toList());
+
+      // Найдите минимальный доступный ID, начиная с 1.
+      while (existingIds.contains(id)) {
+        id++;
+      }
+    }
     System.out.println("RECORD ID: " + id);
     System.out.println("Income or expenses:");
     System.out.println("Income 1           |            Expenses 2");
@@ -57,6 +69,7 @@ public class RecordOperation {
     }
     System.out.println("Enter comment:");
     String comment = sc.nextLine();
+
 
     System.out.println("Input amount:");
     double amount = Double.parseDouble(sc.nextLine());
