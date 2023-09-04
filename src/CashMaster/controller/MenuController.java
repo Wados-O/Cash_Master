@@ -1,6 +1,9 @@
 package CashMaster.controller;
 
-import CashMaster.Sorts.SortsSource;
+import CashMaster.Comparators.AmountComparator;
+import CashMaster.Comparators.CategoryComparator;
+import CashMaster.Comparators.CommentComparator;
+import CashMaster.Comparators.DateComparator;
 import CashMaster.model.Category;
 import CashMaster.model.Record;
 import CashMaster.service.RecordOperation;
@@ -51,22 +54,24 @@ public class MenuController {
   }
 
   public static void sortRecords(Scanner sc) throws IOException, ParseException {
+
     while (true) {
       RecordOperation.printList(records);
       System.out.println(MenuButton.SHOW_SORT_MENU);
+      RecordOperation.printIncome(records);
       int choice = sc.nextInt();
       switch (choice) {
         case 1:
-          SortsSource.sortByCategory(records);
+        CategoryComparator.sortByCategory(records);
           break;
         case 2:
-          SortsSource.sortByComment(records);
+         CommentComparator.sortByComment(records);
           break;
         case 3:
-          SortsSource.sortByAmount(records);
+          AmountComparator.sortByAmount(records);
           break;
         case 4:
-          SortsSource.sortByDate(records);
+         DateComparator.sortByDate(records);
           break;
         case 5:
           mainMenu(sc);

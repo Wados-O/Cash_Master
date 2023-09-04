@@ -148,9 +148,21 @@ public class RecordOperation {
 
     switch (choice) {
       case 1:
-        System.out.print("Enter new category: ");
-        String newCategory = scanner.nextLine();
-        recordToUpdate.setCategory(newCategory);
+        System.out.println("Available categories:");
+        for (int i = 0; i < 10; i++) {
+          System.out.println(i + 1 + ". " + categories.get(i).getTitle());
+        }
+        System.out.print("Enter the number of the new category: ");
+        int categoryChoice = scanner.nextInt();
+        scanner.nextLine(); // Съедаем перевод строки
+
+        if (categoryChoice >= 1 && categoryChoice <= categories.size()) {
+          String newCategory = categories.get(categoryChoice - 1).getTitle();
+          recordToUpdate.setCategory(newCategory);
+        } else {
+          System.out.println("Invalid category choice.");
+          break;
+        }
         break;
       case 2:
         System.out.print("Enter new comment: ");
