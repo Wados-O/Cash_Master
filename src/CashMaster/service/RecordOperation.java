@@ -132,14 +132,11 @@ public class RecordOperation {
     return str;
   }
   public static void printList(List<Record> records) {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
 
     System.out.println(HEADER);
     for (int i = 0; i < records.size(); i++) {
       Record record = records.get(i);
-      Category category = getCategoryById(record.getCategory());
-
-      String formattedDate = dateFormat.format(record.getDate());
       String recordRow = String.format("│%-6d│%-29s│%-31s│%-30s│%-28s│",
               record.getId(),
               record.getCategory(),
