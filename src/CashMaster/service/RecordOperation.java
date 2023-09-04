@@ -229,9 +229,22 @@ public class RecordOperation {
     }
     return Math.abs(totalExpenses);
   }
+  public static double calculateBalance(List<Record> records){
+    double totalIncome = 0.0;
+    double totalExpenses = 0.0;
+    for (Record record : records){
+      if (record.getAmount()>0){
+        totalIncome += record.getAmount();
+      }else {
+        totalExpenses += record.getAmount();
+      }
+    }
+    return  totalIncome + totalExpenses;
+  }
   public static void printIncome(List<Record>records){
-    System.out.print("Total Income: " + calculateTotalIncome(records) + " |||||        ");
-    System.out.print("Total Expenses:  " + calculateTotalExpenses(records));
+    System.out.print("Total Income:    " + calculateTotalIncome(records) + "        |||||      ");
+    System.out.print("Total Expenses:    " + calculateTotalExpenses(records)+"            |||||      ");
+    System.out.print("Balance:    " + calculateBalance(records));
     System.out.println();
   }
 
