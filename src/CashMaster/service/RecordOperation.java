@@ -11,6 +11,7 @@ import CashMaster.model.Record;
 import CashMaster.util.DateUtil;
 import CashMaster.util.FileUtil;
 import CashMaster.view.Colors;
+import CashMaster.view.PrintTable;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -41,7 +42,7 @@ public class RecordOperation {
 
     System.out.println("RECORD ID: " + id);
     System.out.println("Income or expenses:");
-    System.out.println("Income 1 | Expenses 2");
+    System.out.println("Income 1           |            Expenses 2");
     String incOrExp = sc.nextLine();
     if (incOrExp.equalsIgnoreCase("1")) {
       income = true;
@@ -93,7 +94,7 @@ public class RecordOperation {
     return str;
   }
   public static void printList(List<Record> records) {
-
+    PrintTable.cleanConsole();
 
     System.out.println(HEADER);
     for (int i = 0; i < records.size(); i++) {
@@ -257,9 +258,10 @@ public class RecordOperation {
   }
   public static void printIncome(List<Record>records){
     System.out.println();
-    System.out.print(Colors.WHITE_BRIGHT + "Total Income:    " + calculateTotalIncome(records) + "        |||||      ");
-    System.out.print("Total Expenses:    " + calculateTotalExpenses(records)+"            |||||      ");
+    System.out.print(Colors.WHITE_BRIGHT + "Total Income:       " + calculateTotalIncome(records) + "          |||||         ");
+    System.out.print("Total Expenses:        " + calculateTotalExpenses(records)+"            |||||         ");
     System.out.print("Balance:    " + calculateBalance(records) + RESET);
+    System.out.println();
     System.out.println();
   }
 

@@ -1,5 +1,7 @@
 package CashMaster.controller;
 
+import static CashMaster.view.MenuButton.EXIT_BUTTON;
+
 import CashMaster.Comparators.AmountComparator;
 import CashMaster.Comparators.CategoryComparator;
 import CashMaster.Comparators.CommentComparator;
@@ -29,7 +31,8 @@ public class MenuController {
       System.out.println(MenuButton.SHOW_FIRST_MENU);
     // RecordOperation.calcTotalAmount(records);
       RecordOperation.printIncome(records);
-      int choice = InputUtil.readIntLimited(1, 5);
+      System.out.println(EXIT_BUTTON);
+      int choice = InputUtil.readIntLimited(1, 6);
 
       switch (choice) {
         case 1:
@@ -49,6 +52,10 @@ public class MenuController {
         case 5:
           FileUtil.saveToFile(records);
           break;
+        case 6:
+          FileUtil.saveToFile(records);
+          System.exit(0);
+          break;
       }
     }
   }
@@ -59,7 +66,8 @@ public class MenuController {
       RecordOperation.printList(records);
       System.out.println(MenuButton.SHOW_SORT_MENU);
       RecordOperation.printIncome(records);
-      int choice = sc.nextInt();
+      System.out.println(EXIT_BUTTON);
+      int choice = InputUtil.readIntLimited(1, 6);
       switch (choice) {
         case 1:
         CategoryComparator.sortByCategory(records);
@@ -75,6 +83,10 @@ public class MenuController {
           break;
         case 5:
           mainMenu(sc);
+          break;
+        case 6:
+          FileUtil.saveToFile(records);
+         System.exit(0);
           break;
       }
     }

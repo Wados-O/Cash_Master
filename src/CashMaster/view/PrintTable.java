@@ -1,6 +1,11 @@
 package CashMaster.view;
 
 public class PrintTable {
+  public static void cleanConsole(){
+    for (int i = 0; i < 10; i++) {
+      System.out.println();
+    }
+  }
 
   public static final String HEADER = """
       ┌──────┬─────────────────────────────┬───────────────────────────────┬──────────────────────────────┬────────────────────────────┐
