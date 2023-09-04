@@ -1,11 +1,11 @@
-package CashMaster.Comparators;
+package CashMaster.Sorts;
 
 import CashMaster.model.Record;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class CategoryComparator {
+public class SortCategory {
   public static void sortByCategory(List<Record> records) {
     Collections.sort(records, new Comparator<Record>() {
       @Override
