@@ -1,10 +1,10 @@
-package CashMaster.Comparators;
+package CashMaster.Sorts;
 import CashMaster.model.Record;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AmountComparator {
+public class SortAmount {
   public static void sortByAmount(List<Record> records) {
     Collections.sort(records, new Comparator<Record>() {
       @Override

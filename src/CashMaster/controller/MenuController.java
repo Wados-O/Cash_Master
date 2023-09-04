@@ -2,11 +2,11 @@ package CashMaster.controller;
 
 import static CashMaster.view.MenuButton.EXIT_BUTTON;
 
-import CashMaster.Comparators.AmountComparator;
-import CashMaster.Comparators.CategoryComparator;
-import CashMaster.Comparators.CommentComparator;
-import CashMaster.Comparators.DateComparator;
-import CashMaster.Comparators.IdComparator;
+import CashMaster.Sorts.SortAmount;
+import CashMaster.Sorts.SortCategory;
+import CashMaster.Sorts.SortComment;
+import CashMaster.Sorts.SortDate;
+import CashMaster.Sorts.SortId;
 import CashMaster.model.Category;
 import CashMaster.model.Record;
 import CashMaster.service.RecordOperation;
@@ -71,19 +71,19 @@ public class MenuController {
       int choice = InputUtil.readIntLimited(1, 6);
       switch (choice) {
         case 1:
-        CategoryComparator.sortByCategory(records);
+        SortCategory.sortByCategory(records);
           break;
         case 2:
-         CommentComparator.sortByComment(records);
+         SortComment.sortByComment(records);
           break;
         case 3:
-          AmountComparator.sortByAmount(records);
+          SortAmount.sortByAmount(records);
           break;
         case 4:
-         DateComparator.sortByDate(records);
+         SortDate.sortByDate(records);
           break;
         case 5:
-          IdComparator.sortById(records);
+          SortId.sortById(records);
           break;
         case 6:
           FileUtil.saveToFile(records);
