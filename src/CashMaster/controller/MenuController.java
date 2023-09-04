@@ -6,6 +6,7 @@ import CashMaster.Comparators.AmountComparator;
 import CashMaster.Comparators.CategoryComparator;
 import CashMaster.Comparators.CommentComparator;
 import CashMaster.Comparators.DateComparator;
+import CashMaster.Comparators.IdComparator;
 import CashMaster.model.Category;
 import CashMaster.model.Record;
 import CashMaster.service.RecordOperation;
@@ -82,11 +83,11 @@ public class MenuController {
          DateComparator.sortByDate(records);
           break;
         case 5:
-          mainMenu(sc);
+          IdComparator.sortById(records);
           break;
         case 6:
           FileUtil.saveToFile(records);
-         System.exit(0);
+          mainMenu(sc);
           break;
       }
     }

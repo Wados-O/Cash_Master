@@ -26,7 +26,7 @@ public class MenuButton {
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + "  2 - COMMENT SORT   " + RESET + "   "
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + "  3 - AMOUNT  SORT   " + RESET + "   "
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + "  4 - SORT BY DATE   " + RESET + "   "
-      + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + "  5 -  SAVE CHANGE   " + RESET + "   ";
+      + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + "  5 - SORT  BY  ID   " + RESET + "   ";
 
   public static final String SHOW_CHANGE_MENU = ""
       + YELLOW + "SORT MENU:   "
