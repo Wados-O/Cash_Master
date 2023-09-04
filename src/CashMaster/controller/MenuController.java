@@ -4,7 +4,6 @@ import CashMaster.Sorts.SortsSource;
 import CashMaster.model.Category;
 import CashMaster.model.Record;
 import CashMaster.service.RecordOperation;
-import CashMaster.service.RecordsService;
 import CashMaster.util.FileUtil;
 import CashMaster.util.InputUtil;
 import CashMaster.view.MenuButton;
@@ -32,7 +31,7 @@ public class MenuController {
           RecordOperation.addRecord(records,categories);
           break;
         case 2:
-          RecordOperation.updateRecord(sc);
+          RecordOperation.editRecord(sc);
           break;
         case 3:
           RecordOperation.deleteRecord(records);
