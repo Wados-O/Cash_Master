@@ -66,8 +66,8 @@ public class RecordOperation {
         stDate = dateFormat.parse(startDate);
       } catch (ParseException e) {
         System.out.println("Invalid date format. Please use dd.MM.yyyy format.");
-        // Handle the exception or ask the user to input the date again.
-        return; // Exit the method.
+
+        return;
       }
     }
 
@@ -130,7 +130,7 @@ public class RecordOperation {
       return;
     }
 
-    // Выведите текущие данные записи
+
     System.out.println("Current record :");
     System.out.println("Category: " + recordToUpdate.getCategory());
     System.out.println("Comment: " + recordToUpdate.getComment());
@@ -144,7 +144,7 @@ public class RecordOperation {
     System.out.println("4. Date");
 
     int choice = scanner.nextInt();
-    scanner.nextLine(); // Съедаем перевод строки
+    scanner.nextLine();
 
     switch (choice) {
       case 1:
@@ -154,7 +154,7 @@ public class RecordOperation {
         }
         System.out.print("Enter the number of the new category: ");
         int categoryChoice = scanner.nextInt();
-        scanner.nextLine(); // Съедаем перевод строки
+        scanner.nextLine();
 
         if (categoryChoice >= 1 && categoryChoice <= categories.size()) {
           String newCategory = categories.get(categoryChoice - 1).getTitle();
