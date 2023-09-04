@@ -34,7 +34,7 @@ public class FileUtil {
         String[] parts = line.split(SEP);
         if (parts.length == 5) {
           int id = Integer.parseInt(parts[0]);
-          String category = parts[1]; // Читаем категорию как строку
+          String category = parts[1];
           String comment = parts[2];
           double amount = Double.parseDouble(parts[3]);
 
@@ -51,7 +51,7 @@ public class FileUtil {
     try (BufferedWriter bw = new BufferedWriter(new FileWriter(saveFile))) {
       for (Record record : records) {
         String line = record.getId() + SEP +
-            record.getCategory() + SEP + // Используем id категории вместо title
+            record.getCategory() + SEP + //
             record.getComment() + SEP +
             record.getAmount() + SEP +
             new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).format(record.getDate());

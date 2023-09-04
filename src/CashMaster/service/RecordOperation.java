@@ -140,13 +140,13 @@ public class RecordOperation {
       Category category = getCategoryById(record.getCategory());
 
       String formattedDate = dateFormat.format(record.getDate());
-
       String recordRow = String.format("│%-6d│%-29s│%-31s│%-30s│%-28s│",
-          i + 1,
-          category != null ? category.getTitle() : "Income",
-          record.getComment(),
-          record.getAmount(),
-          DateUtil.parseDateStr(record.getDate()));
+              record.getId(),
+              record.getCategory(),
+              record.getComment(),
+              record.getAmount(),
+              DateUtil.parseDateStr(record.getDate()));
+
       System.out.println(recordRow);
       System.out.println(MIDDLE);
     }
