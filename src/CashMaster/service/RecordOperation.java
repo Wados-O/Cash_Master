@@ -15,7 +15,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -85,46 +84,6 @@ public class RecordOperation {
     FileUtil.saveToFile(records);
   }
 
-  public static void createRecord(Scanner scanner) throws ParseException {
-    System.out.println("Создание новой записи:");
-
-    // Получите данные от пользователя
-    System.out.print("Введите категорию: ");
-    System.out.println();
-    for (int i = 1; i < categories.size(); i++) {
-      System.out.println("" + i  + " " + categories.get(i).getTitle());
-    }
-    String category = scanner.next();
-    scanner.nextLine();
-
-    System.out.print("Введите комментарий: ");
-    String comment = scanner.nextLine();
-    double amount = 0.0; // Инициализируйте amount значением по умолчанию
-
-    // Проверяем, правильно ли пользователь ввел сумму
-    boolean validAmount = false;
-    while (!validAmount) {
-      try {
-        System.out.print("Введите сумму: ");
-        amount = scanner.nextDouble();
-        validAmount = true; // Если ввод правильный, выходим из цикла
-      } catch (InputMismatchException e) {
-        System.out.println("Некорректный ввод. Введите сумму с использованием десятичной точки.");
-        scanner.nextLine(); // Очищаем буфер ввода
-      }
-    }
-
-    System.out.print("Введите дату (dd.MM.yyyy): ");
-    String dateStr = scanner.next();
-    Date date = DateUtil.parseStrToDate(dateStr);
-
-    // Создайте объект Record с полученными данными
-    Record record = new Record(Record.getNewId(records), category, comment, amount, date);
-
-    // Добавьте запись в список records
-    records.add(record);
-    System.out.println("Запись успешно создана.");
-  }
   public static String stringLength(String str,int maxLength){
     if (str.length()> maxLength){
       return str.substring(0,maxLength);
@@ -150,14 +109,12 @@ public class RecordOperation {
     System.out.println(FOOTER);
   }
 
-  public static void updateRecord(Scanner scanner) throws ParseException {
-    System.out.println("Изменение записи:");
+  public static void editRecord(Scanner scanner) throws ParseException {
+    System.out.println("Edit record :");
 
-    // Получите идентификатор записи, которую пользователь хочет изменить
-    System.out.print("Введите идентификатор записи для изменения: ");
+    System.out.print("Enter id of record: ");
     int recordId = scanner.nextInt();
 
-    // Поиск записи по идентификатору
     Record recordToUpdate = null;
     int indexToUpdate = -1;
     for (int i = 0; i < records.size(); i++) {
@@ -168,69 +125,66 @@ public class RecordOperation {
       }
     }
 
-    // Проверка, найдена ли запись
     if (recordToUpdate == null) {
-      System.out.println("Запись с указанным идентификатором не найдена.");
+      System.out.println("Not found record .");
       return;
     }
 
     // Выведите текущие данные записи
-    System.out.println("Текущие данные записи:");
-    System.out.println("Категория: " + recordToUpdate.getCategory());
-    System.out.println("Комментарий: " + recordToUpdate.getComment());
-    System.out.println("Сумма: " + recordToUpdate.getAmount());
-    System.out.println("Дата: " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate()));
+    System.out.println("Current record :");
+    System.out.println("Category: " + recordToUpdate.getCategory());
+    System.out.println("Comment: " + recordToUpdate.getComment());
+    System.out.println("Amount: " + recordToUpdate.getAmount());
+    System.out.println("Date: " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate()));
 
-    // Предоставьте опции для обновления полей записи
-    System.out.println("Выберите, какие данные вы хотите изменить (введите номер):");
-    System.out.println("1. Категория");
-    System.out.println("2. Комментарий");
-    System.out.println("3. Сумма");
-    System.out.println("4. Дата");
+    System.out.println("What would you like to change :");
+    System.out.println("1. Category");
+    System.out.println("2. Comment");
+    System.out.println("3. Amount");
+    System.out.println("4. Date");
 
     int choice = scanner.nextInt();
     scanner.nextLine(); // Съедаем перевод строки
 
     switch (choice) {
       case 1:
-        System.out.print("Введите новую категорию: ");
+        System.out.print("Enter new category: ");
         String newCategory = scanner.nextLine();
         recordToUpdate.setCategory(newCategory);
         break;
       case 2:
-        System.out.print("Введите новый комментарий: ");
+        System.out.print("Enter new comment: ");
         String newComment = scanner.nextLine();
         recordToUpdate.setComment(newComment);
         break;
       case 3:
-        System.out.print("Введите новую сумму: ");
+        System.out.print("Enter new amount: ");
         double newAmount = scanner.nextDouble();
         recordToUpdate.setAmount(newAmount);
         break;
       case 4:
-        System.out.print("Введите новую дату (dd.MM.yyyy): ");
+        System.out.print("Enter new date (dd.MM.yyyy): ");
         String newDateStr = scanner.next();
         Date newDate = DateUtil.parseStrToDate(newDateStr);
         recordToUpdate.setDate(newDate);
         break;
       default:
-        System.out.println("Неверный выбор.");
+        System.out.println("Invalid choice.");
         break;
     }
 
     records.set(indexToUpdate, recordToUpdate);
-    System.out.println("Запись успешно изменена.");
+    System.out.println("Record was changing.");
   }
 
   public static void deleteRecord(List<Record> records)throws IOException {
-    System.out.println("Удаление записи:");
-Scanner scanner = new Scanner(System.in);
-    // Получите идентификатор записи, которую пользователь хочет удалить
-    System.out.print("Введите идентификатор записи для удаления: ");
-    int recordId = scanner.nextInt() -1;
+    System.out.println("Delete record:");
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Enter id record to delete: ");
+    int recordId = scanner.nextInt();
 
     records.removeIf(record -> record.getId() ==recordId  );
-    System.out.println("Запись успешно удалена");
+    System.out.println("Record was deleted");
   }
   private static Category getCategoryById(String categoryId) {
     for (Category category : categories) {
