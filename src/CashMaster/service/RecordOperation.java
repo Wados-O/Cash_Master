@@ -234,7 +234,12 @@ public class RecordOperation {
     return null;
   }
 
-
+  /**
+   * Calculates the total income from a list of financial records.
+   *
+   * @param records The list of financial records to calculate income from.
+   * @return The total income as a double value.
+   */
 
   public static double calculateTotalIncome(List<Record> records){
     double totalIncome = 0.0;
