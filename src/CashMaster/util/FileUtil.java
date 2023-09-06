@@ -81,7 +81,11 @@ public class FileUtil {
   public static void setSaveFile(String saveFile) {
     FileUtil.saveFile = saveFile;
   }
-
+  /**
+   * Retrieves the list of records.
+   *
+   * @return The list of records.
+   */
   public static List<Record> getRecords() {
     return records;
   }
