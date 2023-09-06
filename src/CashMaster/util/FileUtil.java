@@ -73,6 +73,11 @@ public class FileUtil {
     }
   }
 
+  /**
+   * Sets the path to the file where records will be saved.
+   *
+   * @param saveFile The path to the file.
+   */
   public static void setSaveFile(String saveFile) {
     FileUtil.saveFile = saveFile;
   }
