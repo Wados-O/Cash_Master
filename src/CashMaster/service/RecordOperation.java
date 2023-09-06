@@ -250,6 +250,12 @@ public class RecordOperation {
     }
     return totalIncome;
   }
+  /**
+   * Calculates the total expenses from a list of financial records.
+   *
+   * @param records The list of financial records to calculate expenses from.
+   * @return The total expenses as a positive double value.
+   */
   public static double calculateTotalExpenses(List<Record> records){
     double totalExpenses = 0.0;
     for (Record record : records){
