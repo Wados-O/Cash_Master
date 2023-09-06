@@ -21,6 +21,12 @@ public class FileUtil {
   private static String saveFile = "res/record.csv";
   private static List<Record> records = new ArrayList<>();
   private static final String SEP = ";;;";
+  /**
+   * Reads data from a file and populates a list of records.
+   *
+   * @throws IOException    If an I/O error occurs while reading the file.
+   * @throws ParseException If there's an error parsing the data from the file.
+   */
 
   public static void readFile() throws IOException, ParseException {
     File file = new File(saveFile);
