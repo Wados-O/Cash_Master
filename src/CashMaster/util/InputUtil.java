@@ -7,11 +7,11 @@ import java.util.Scanner;
 
 public class InputUtil {
   /**
-   * check for invalid input only numbers
+   * Reads an integer value from the console within a specified range.
    *
-   * @param min
-   * @param max
-   * @return
+   * @param min The minimum acceptable integer value.
+   * @param max The maximum acceptable integer value.
+   * @return An integer value entered by the user within the specified range.
    */
   public static int readIntLimited(int min, int max) {
     Scanner sc = new Scanner(System.in);
@@ -25,11 +25,26 @@ public class InputUtil {
       }
       if (!(num >= min && num <= max)) {
         System.out.println(PURPLE);
-        System.out.printf("Enter a number from %d to %d:", min, max);
+        System.out.printf("Please enter a number from %d to %d:", min, max);
         System.out.println(RESET);
       }
     } while (!(num >= min && num <= max));
     return num;
+  }
+  public static String readStringLimited(int min , int max){
+    Scanner sc = new Scanner(System.in);
+    String input;
+    while (true){
+      input = sc.nextLine();
+      if (input.length() >= min && input.length() <= max ){
+        break;
+      }else {
+        System.out.println(PURPLE);
+        System.out.printf("Enter a string from %d to %d",min,max );
+        System.out.println(RESET);
+      }
+    }
+    return input;
   }
   /**
    * Truncates a string to a specified maximum length.
