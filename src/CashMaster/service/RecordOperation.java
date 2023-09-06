@@ -110,7 +110,11 @@ public class RecordOperation {
     FileUtil.saveToFile(records);
   }
 
-
+  /**
+   * Prints a list of financial records in a tabular format to the console.
+   *
+   * @param records The list of financial records to be printed.
+   */
   public static void printList(List<Record> records) {
     PrintTable.cleanConsole();
 
