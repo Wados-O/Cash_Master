@@ -31,6 +31,13 @@ public class InputUtil {
     } while (!(num >= min && num <= max));
     return num;
   }
+  /**
+   * Reads a string from the console with a length within a specified range.
+   *
+   * @param min The minimum acceptable length for the input string.
+   * @param max The maximum acceptable length for the input string.
+   * @return A string entered by the user with a length within the specified range.
+   */
   public static String readStringLimited(int min , int max){
     Scanner sc = new Scanner(System.in);
     String input;
