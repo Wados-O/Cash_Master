@@ -265,6 +265,13 @@ public class RecordOperation {
     }
     return Math.abs(totalExpenses);
   }
+
+  /**
+   * Calculates the balance based on a list of financial records.
+   *
+   * @param records The list of financial records to calculate the balance from.
+   * @return The balance, which is the difference between total income and total expenses.
+   */
   public static double calculateBalance(List<Record> records){
     double totalIncome = 0.0;
     double totalExpenses = 0.0;
