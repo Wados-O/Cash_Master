@@ -1,5 +1,6 @@
 package CashMaster.view;
 
+import CashMaster.calculator.FinancialCalculator;
 import CashMaster.model.Record;
 import CashMaster.service.RecordOperation;
 import CashMaster.util.FileUtil;
@@ -40,7 +41,7 @@ public class MenuButton {
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + " 5 -  SAVE  CHANGE   " + RESET + "   ";
   public static final String SHOW_FINANCE = ""
           + YELLOW + "financial condition:     "
-          + WHITE_BOLD_BRIGHT + CYAN_BACKGROUND + "  TOTAL   INCOME   " + RecordOperation.calculateTotalIncome(records) + "     " + RESET + "        "
-          + WHITE_BOLD_BRIGHT + PURPLE_BACKGROUND + "  TOTAL EXPENSES   " + RecordOperation.calculateTotalExpenses(records) + "     " + RESET + "        "
-          + WHITE_BOLD_BRIGHT + GREEN_BACKGROUND + "      BALANCE      " + RecordOperation.calculateBalance(records) + "     "+ RESET + "   ";
+          + WHITE_BOLD_BRIGHT + CYAN_BACKGROUND + "  TOTAL   INCOME   " + FinancialCalculator.calculateTotalIncome(records) + "     " + RESET + "        "
+          + WHITE_BOLD_BRIGHT + PURPLE_BACKGROUND + "  TOTAL EXPENSES   " + FinancialCalculator.calculateTotalExpenses(records) + "     " + RESET + "        "
+          + WHITE_BOLD_BRIGHT + GREEN_BACKGROUND + "      BALANCE      " + FinancialCalculator.calculateBalance(records) + "     "+ RESET + "   ";
 }
