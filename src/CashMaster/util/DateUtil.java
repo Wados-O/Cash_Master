@@ -17,15 +17,13 @@ public class DateUtil {
     for (SimpleDateFormat dateFormat : dateFormats) {
       try {
         String formattedDate = dateFormat.format(date);
-        // Если форматирование прошло успешно, возвращаем полученную строку
         return formattedDate;
       } catch (Exception e) {
-        // Продолжаем итерироваться по форматам, если текущий не подходит
       }
     }
 
     System.out.println(
-        Colors.YELLOW + "Неверный формат даты. Используйте [dd.MM.yyyy]." + Colors.RESET);
+        Colors.YELLOW + "Invalid date format. Use [dd.MM.yyyy]." + Colors.RESET);
     return null;
   }
   public static Date parseStrToDate(String string)throws ParseException{
@@ -43,6 +41,6 @@ public class DateUtil {
 
       }
     }
-    throw new ParseException("Неверный формат даты.",0);
+    throw new ParseException("Invalid date format.",0);
   }
 }
