@@ -210,7 +210,12 @@ public class RecordOperation {
     records.set(indexToUpdate, recordToUpdate);
     System.out.println("Record was changing.");
   }
-
+  /**
+   * Deletes a financial record from the list of records by its ID.
+   *
+   * @param records The list of financial records from which the record will be deleted.
+   * @throws IOException If there is an issue with file operations.
+   */
   public static void deleteRecord(List<Record> records)throws IOException {
     System.out.println("Delete record:");
     Scanner scanner = new Scanner(System.in);
