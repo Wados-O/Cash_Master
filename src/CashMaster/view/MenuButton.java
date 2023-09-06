@@ -1,13 +1,16 @@
 package CashMaster.view;
 
-import static CashMaster.view.Colors.GREEN;
-import static CashMaster.view.Colors.GREEN_BACKGROUND;
-import static CashMaster.view.Colors.RESET;
-import static CashMaster.view.Colors.WHITE_BOLD_BRIGHT;
-import static CashMaster.view.Colors.YELLOW;
-import static CashMaster.view.Colors.YELLOW_BACKGROUND;
+import CashMaster.model.Record;
+import CashMaster.service.RecordOperation;
+import CashMaster.util.FileUtil;
+
+import java.util.List;
+
+import static CashMaster.view.Colors.*;
 
 public class MenuButton {
+  static List<Record> records = FileUtil.getRecords();
+
   public static final String EXIT_BUTTON = ""
       + GREEN + "SAVE AND OUT:    "
       + GREEN_BACKGROUND + WHITE_BOLD_BRIGHT + "  6 - EXIT   " + RESET;
@@ -35,4 +38,9 @@ public class MenuButton {
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + " 3 - CHANGE  AMOUNT  " + RESET + "   "
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + " 4 - CHANGE DATE OF  " + RESET + "   "
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + " 5 -  SAVE  CHANGE   " + RESET + "   ";
+  public static final String SHOW_FINANCE = ""
+          + YELLOW + "financial condition:     "
+          + WHITE_BOLD_BRIGHT + CYAN_BACKGROUND + "  TOTAL   INCOME   " + RecordOperation.calculateTotalIncome(records) + "     " + RESET + "        "
+          + WHITE_BOLD_BRIGHT + PURPLE_BACKGROUND + "  TOTAL EXPENSES   " + RecordOperation.calculateTotalExpenses(records) + "     " + RESET + "        "
+          + WHITE_BOLD_BRIGHT + GREEN_BACKGROUND + "      BALANCE      " + RecordOperation.calculateBalance(records) + "     "+ RESET + "   ";
 }

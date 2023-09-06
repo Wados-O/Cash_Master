@@ -2,6 +2,7 @@ package CashMaster.controller;
 
 import static CashMaster.util.InputUtil.readIntLimited;
 import static CashMaster.view.MenuButton.EXIT_BUTTON;
+import static CashMaster.view.MenuButton.SHOW_FINANCE;
 
 import CashMaster.Sorts.SortAmount;
 import CashMaster.Sorts.SortCategory;
@@ -30,10 +31,15 @@ public class MenuController {
     while (isRun) {
 
       RecordOperation.printList(records);
+      System.out.println();
       System.out.println(MenuButton.SHOW_FIRST_MENU);
+      System.out.println();
     // RecordOperation.calcTotalAmount(records);
-      RecordOperation.printIncome(records);
+      //RecordOperation.printIncome(records);
+      System.out.println(SHOW_FINANCE);
+      System.out.println();
       System.out.println(EXIT_BUTTON);
+      System.out.println();
       int choice = readIntLimited(1, 6);
 
       switch (choice) {
@@ -66,8 +72,12 @@ public class MenuController {
 
     while (true) {
       RecordOperation.printList(records);
+      System.out.println();
       System.out.println(MenuButton.SHOW_SORT_MENU);
-      RecordOperation.printIncome(records);
+      System.out.println();
+      //RecordOperation.printIncome(records);
+      System.out.println(SHOW_FINANCE);
+      System.out.println();
       System.out.println(EXIT_BUTTON);
       int choice = readIntLimited(1, 6);
       switch (choice) {
