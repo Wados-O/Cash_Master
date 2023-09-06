@@ -28,6 +28,14 @@ public class RecordOperation {
   static List<Record> records = FileUtil.getRecords();
   static List<Category> categories = Category.createCategories();
  static Record record = new Record();
+  /**
+   * Adds a new financial record to the list of records and saves it to a file.
+   *
+   * @param records    The list of existing financial records.
+   * @param categories The list of available categories.
+   * @throws IOException    If there is an issue with file operations.
+   * @throws ParseException If there is an issue with parsing date input.
+   */
   public static void addRecord(List<Record> records, List<Category> categories) throws IOException, ParseException {
 
     Scanner sc = new Scanner(System.in);
