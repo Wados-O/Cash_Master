@@ -284,6 +284,11 @@ public class RecordOperation {
     }
     return  totalIncome + totalExpenses;
   }
+  /**
+   * Prints a summary of total income, total expenses, and the balance to the console.
+   * Do not delete . Can be used.
+   * @param records The list of financial records to calculate and display income and expenses from.
+   */
   public static void printIncome(List<Record>records){
     System.out.println();
     System.out.print(Colors.WHITE_BRIGHT + "Total Income:       " + calculateTotalIncome(records) + "          |||||         ");
