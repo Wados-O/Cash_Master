@@ -47,6 +47,12 @@ public class FileUtil {
     }
   }
 
+  /**
+   * Saves a list of records to a file.
+   *
+   * @param records The list of records to be saved.
+   * @throws IOException If an I/O error occurs while writing to the file.
+   */
   public static void saveToFile(List<Record> records) throws IOException {
     try (BufferedWriter bw = new BufferedWriter(new FileWriter(saveFile))) {
       for (Record record : records) {
