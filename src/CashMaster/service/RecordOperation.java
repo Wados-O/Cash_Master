@@ -10,7 +10,9 @@ import CashMaster.model.Category;
 import CashMaster.model.Record;
 import CashMaster.util.DateUtil;
 import CashMaster.util.FileUtil;
+import CashMaster.util.InputUtil;
 import CashMaster.view.Colors;
+import CashMaster.view.MenuButton;
 import CashMaster.view.PrintTable;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -100,22 +102,18 @@ public class RecordOperation {
     FileUtil.saveToFile(records);
   }
 
-  public static String stringLength(String str,int maxLength){
-    if (str.length()> maxLength){
-      return str.substring(0,maxLength);
-    }
-    return str;
-  }
+
   public static void printList(List<Record> records) {
     PrintTable.cleanConsole();
 
     System.out.println(HEADER);
     for (int i = 0; i < records.size(); i++) {
       Record record = records.get(i);
+      String comment = InputUtil.stringLength(record.getComment(), 31);
       String recordRow = String.format("│%-6d│%-29s│%-31s│%-30s│%-28s│",
               record.getId(),
               record.getCategory(),
-              record.getComment(),
+              comment,
               record.getAmount(),
               DateUtil.parseDateStr(record.getDate()));
 
@@ -126,11 +124,13 @@ public class RecordOperation {
   }
 
   public static void editRecord(Scanner scanner) throws ParseException {
+
     System.out.println("Edit record :");
 
     System.out.print("Enter id of record: ");
     int recordId = scanner.nextInt();
-
+    printList(records);
+    System.out.println(MenuButton.SHOW_CHANGE_MENU);
     Record recordToUpdate = null;
     int indexToUpdate = -1;
     for (int i = 0; i < records.size(); i++) {
@@ -152,12 +152,6 @@ public class RecordOperation {
     System.out.println("Comment: " + recordToUpdate.getComment());
     System.out.println("Amount: " + recordToUpdate.getAmount());
     System.out.println("Date: " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate()));
-
-    System.out.println("What would you like to change :");
-    System.out.println("1. Category");
-    System.out.println("2. Comment");
-    System.out.println("3. Amount");
-    System.out.println("4. Date");
 
     int choice = scanner.nextInt();
     scanner.nextLine();
