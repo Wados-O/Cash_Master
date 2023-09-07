@@ -2,6 +2,7 @@ package CashMaster.service;
 
 
 import static CashMaster.view.Colors.RESET;
+import static CashMaster.view.MenuButton.INCOME_OR_EXP;
 import static CashMaster.view.PrintTable.FOOTER;
 import static CashMaster.view.PrintTable.HEADER;
 import static CashMaster.view.PrintTable.MIDDLE;
@@ -63,8 +64,9 @@ public class RecordOperation {
 //      }
 //    }
     System.out.println("RECORD ID: " + id);
-    System.out.println("Income or expenses:");
-    System.out.println("Income 1           |            Expenses 2");
+//    System.out.println("Income or expenses:");
+//    System.out.println("Income 1           |            Expenses 2");
+    System.out.println(INCOME_OR_EXP);
     String incOrExp = sc.nextLine();
     if (incOrExp.equalsIgnoreCase("1")) {
       income = true;
