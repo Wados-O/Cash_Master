@@ -33,8 +33,8 @@ public class MenuButton {
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + "  5 - SORT  BY  ID   " + RESET + "   ";
   public static final String INCOME_OR_EXP = ""
           +YELLOW + "Income or expenses:    "
-          + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + "  1  -  INCOME      "  + RESET + "     "
-          + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + "  2  -  EXPENSE     " + RESET + "     ";
+          + WHITE_BOLD_BRIGHT + CYAN_BACKGROUND + "  1  -  INCOME      "  + RESET + "     "
+          + WHITE_BOLD_BRIGHT + PURPLE_BACKGROUND + "  2  -  EXPENSE     " + RESET + "     ";
 
   public static final String SHOW_CHANGE_MENU = ""
       + YELLOW + "SORT MENU:   "
