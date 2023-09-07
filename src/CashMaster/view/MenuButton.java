@@ -37,7 +37,7 @@ public class MenuButton {
           + WHITE_BOLD_BRIGHT + PURPLE_BACKGROUND + "  2  -  EXPENSE     " + RESET + "     ";
 
   public static final String SHOW_CHANGE_MENU = ""
-      + YELLOW + "SORT MENU:   "
+      + YELLOW + "CHANGE MENU:   "
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + " 1 - CHANGE CATEGORY " + RESET + "   "
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + " 2 - CHANGE  COMMENT " + RESET + "   "
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + " 3 - CHANGE  AMOUNT  " + RESET + "   "

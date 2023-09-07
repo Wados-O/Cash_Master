@@ -1,7 +1,7 @@
 package CashMaster.service;
 
 
-import static CashMaster.view.Colors.RESET;
+import static CashMaster.view.Colors.*;
 import static CashMaster.view.MenuButton.INCOME_OR_EXP;
 import static CashMaster.view.PrintTable.FOOTER;
 import static CashMaster.view.PrintTable.HEADER;
@@ -146,15 +146,15 @@ public class RecordOperation {
       return;
     }
 
-
-    System.out.println("Current record :  | ");
-    System.out.print("  Category:    " + recordToUpdate.getCategory());
-    System.out.print("  Comment:     " + recordToUpdate.getComment());
-    System.out.print("  Amount:      " + recordToUpdate.getAmount());
-    System.out.print("  Date:     " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate()));
-
+    System.out.println();
+    System.out.print(BLUE + "Current record :  | " + RESET +"    ");
+    System.out.print(YELLOW + "  Category:    " + recordToUpdate.getCategory() +RESET+ "     ");
+    System.out.print(PURPLE + "  Comment:     " + recordToUpdate.getComment()+ RESET+ "    ");
+    System.out.print(RED +"  Amount:      " + recordToUpdate.getAmount()+ RESET+"     ");
+    System.out.print(GREEN_BOLD + "  Date:     " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate())+ RESET);
+    System.out.println();
     int choice = scanner.nextInt();
-    scanner.nextLine();
+//    scanner.nextLine();
 
     switch (choice) {
       case 1:
@@ -164,7 +164,7 @@ public class RecordOperation {
         }
         System.out.print("Enter the number of the new category: ");
         int categoryChoice = scanner.nextInt();
-        scanner.nextLine();
+//        scanner.nextLine();
 
         if (categoryChoice >= 1 && categoryChoice <= categories.size()) {
           String newCategory = categories.get(categoryChoice - 1).getTitle();
@@ -176,7 +176,7 @@ public class RecordOperation {
         break;
       case 2:
         System.out.print("Enter new comment: ");
-        String newComment = scanner.nextLine();
+        String newComment = InputUtil.readStringLimited(4,60);
         recordToUpdate.setComment(newComment);
         break;
       case 3:
