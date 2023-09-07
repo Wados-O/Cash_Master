@@ -52,20 +52,7 @@ public class RecordOperation {
     int multiply = 1;
     int id = Record.getNewId(records);
 
-//    if (!records.isEmpty()) {
-//      // Создайте список, содержащий все существующие ID.
-//      List<Integer> existingIds = records.stream()
-//          .map(Record::getId)
-//          .collect(Collectors.toList());
-//
-//      // Найдите минимальный доступный ID, начиная с 1.
-//      while (existingIds.contains(id)) {
-//        id++;
-//      }
-//    }
     System.out.println("RECORD ID: " + id);
-//    System.out.println("Income or expenses:");
-//    System.out.println("Income 1           |            Expenses 2");
     System.out.println(INCOME_OR_EXP);
     String incOrExp = sc.nextLine();
     if (incOrExp.equalsIgnoreCase("1")) {
@@ -94,7 +81,6 @@ public class RecordOperation {
         stDate = dateFormat.parse(startDate);
       } catch (ParseException e) {
         System.out.println("Invalid date format. Please use dd.MM.yyyy format.");
-
         return;
       }
     }
@@ -161,11 +147,11 @@ public class RecordOperation {
     }
 
 
-    System.out.println("Current record :");
-    System.out.println("Category: " + recordToUpdate.getCategory());
-    System.out.println("Comment: " + recordToUpdate.getComment());
-    System.out.println("Amount: " + recordToUpdate.getAmount());
-    System.out.println("Date: " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate()));
+    System.out.println("Current record :  | ");
+    System.out.print("  Category:    " + recordToUpdate.getCategory());
+    System.out.print("  Comment:     " + recordToUpdate.getComment());
+    System.out.print("  Amount:      " + recordToUpdate.getAmount());
+    System.out.print("  Date:     " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate()));
 
     int choice = scanner.nextInt();
     scanner.nextLine();

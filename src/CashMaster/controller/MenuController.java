@@ -51,10 +51,8 @@ public class MenuController {
           break;
         case 3:
           RecordOperation.deleteRecord(records);
-          //todo delete records
           break;
         case 4:
-          //todo sort menu;
           sortRecords(sc);
           break;
         case 5:
