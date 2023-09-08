@@ -44,7 +44,7 @@ public class MenuController {
 
       switch (choice) {
         case 1:
-          RecordOperation.addRecord(records,categories);
+          RecordOperation.addRecord(records);
           break;
         case 2:
           RecordOperation.editRecord(sc);
