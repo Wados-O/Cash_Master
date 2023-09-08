@@ -10,7 +10,8 @@ public enum CategoryExpenses {
   FUEL(7, "Fuel"),
   HOBBY(8, "Hobby"),
   VACATIONS(9, "Vacations"),
-  MEDICINE(10, "Medicine");
+  MEDICINE(10, "Medicine"),
+  OTHER(11,"Other");
 
 
   private final int num;
