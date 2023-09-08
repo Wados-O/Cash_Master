@@ -91,7 +91,7 @@ public class RecordOperation {
       }
     }
 
-    Record record = new Record(); // Создаем новый объект Record для каждой записи
+    Record record = new Record();
     record.setId(id);
     record.setCategory(incomeCategory);
     record.setComment(comment);
@@ -101,7 +101,7 @@ public class RecordOperation {
     amount *= multiply;
     record.setAmount(amount);
     record.setDate(stDate);
-    records.add(record); // Добавляем новый созданный объект в список
+    records.add(record);
     FileUtil.saveToFile(records);
   }
 
@@ -117,7 +117,7 @@ public class RecordOperation {
     for (int i = 0; i < records.size(); i++) {
       Record record = records.get(i);
       String comment = InputUtil.stringLength(record.getComment(), 31);
-      String recordRow = String.format("│%-6d│%-29s│%-31s│%-30s│%-28s│",
+      String recordRow = String.format("│%-6d│%-29s│%-41s│%-30s│%-28s│",
           record.getId(),
           record.getCategory(),
           comment,
@@ -140,13 +140,13 @@ public class RecordOperation {
     Record recordToUpdate = null;
     int indexToUpdate = -1;
 
-    boolean income = false; // Define the 'income' variable here
+    boolean income = false;
 
     for (int i = 0; i < records.size(); i++) {
       if (records.get(i).getId() == recordId) {
         recordToUpdate = records.get(i);
         indexToUpdate = i;
-        income = isIncomeCategory(recordToUpdate.getCategory()); // Determine if it's an income category
+        income = isIncomeCategory(recordToUpdate.getCategory());
         break;
       }
     }
