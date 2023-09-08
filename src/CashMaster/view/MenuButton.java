@@ -44,7 +44,7 @@ public class MenuButton {
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + " 4 - CHANGE DATE OF  " + RESET + "   "
       + WHITE_BOLD_BRIGHT + YELLOW_BACKGROUND + " 5 -  SAVE  CHANGE   " + RESET + "   ";
   public static final String SHOW_FINANCE = ""
-          + YELLOW + "financial condition:     "
+          + YELLOW + "FINANCIAL CONDITION:     "
           + WHITE_BOLD_BRIGHT + CYAN_BACKGROUND + "  TOTAL   INCOME   " + FinancialCalculator.calculateTotalIncome(records) + "     " + RESET + "        "
           + WHITE_BOLD_BRIGHT + PURPLE_BACKGROUND + "  TOTAL EXPENSES   " + FinancialCalculator.calculateTotalExpenses(records) + "     " + RESET + "        "
           + WHITE_BOLD_BRIGHT + GREEN_BACKGROUND + "      BALANCE      " + FinancialCalculator.calculateBalance(records) + "     "+ RESET + "   ";
