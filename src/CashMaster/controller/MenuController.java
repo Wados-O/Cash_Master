@@ -9,11 +9,9 @@ import CashMaster.Sorts.SortCategory;
 import CashMaster.Sorts.SortComment;
 import CashMaster.Sorts.SortDate;
 import CashMaster.Sorts.SortId;
-import CashMaster.model.Category;
 import CashMaster.model.Record;
 import CashMaster.service.RecordOperation;
 import CashMaster.util.FileUtil;
-import CashMaster.util.InputUtil;
 import CashMaster.view.MenuButton;
 import java.io.IOException;
 import java.text.ParseException;
@@ -23,9 +21,14 @@ import java.util.Scanner;
 public class MenuController {
 
   static List<Record> records = FileUtil.getRecords();
-  static List<Category> categories = Category.createCategories();
 
-
+  /**
+   * Displays the main menu of the application and handles user input to perform corresponding operations.
+   *
+   * @param sc A Scanner object for user input.
+   * @throws IOException If there is an I/O error while reading or writing data.
+   * @throws ParseException If there is an error in parsing date input.
+   */
   public static void mainMenu(Scanner sc) throws IOException, ParseException {
     boolean isRun = true;
     while (isRun) {
@@ -34,8 +37,6 @@ public class MenuController {
       System.out.println();
       System.out.println(MenuButton.SHOW_FIRST_MENU);
       System.out.println();
-    // RecordOperation.calcTotalAmount(records);
-      //RecordOperation.printIncome(records);
       System.out.println(SHOW_FINANCE);
       System.out.println();
       System.out.println(EXIT_BUTTON);
@@ -73,7 +74,6 @@ public class MenuController {
       System.out.println();
       System.out.println(MenuButton.SHOW_SORT_MENU);
       System.out.println();
-      //RecordOperation.printIncome(records);
       System.out.println(SHOW_FINANCE);
       System.out.println();
       System.out.println(EXIT_BUTTON);
