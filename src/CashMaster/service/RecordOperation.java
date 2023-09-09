@@ -6,7 +6,6 @@ import static CashMaster.view.PrintTable.FOOTER;
 import static CashMaster.view.PrintTable.HEADER;
 import static CashMaster.view.PrintTable.MIDDLE;
 
-import CashMaster.model.Category;
 import CashMaster.model.CategoryExpenses;
 import CashMaster.model.CategoryIncome;
 import CashMaster.model.Record;
@@ -134,7 +133,7 @@ public class RecordOperation {
     System.out.println("Edit record:");
 
     System.out.print("Enter id of record: ");
-    int recordId = scanner.nextInt();
+    int recordId = scanner.nextInt(records.size());
     printList(records);
     System.out.println(MenuButton.SHOW_CHANGE_MENU);
     Record recordToUpdate = null;

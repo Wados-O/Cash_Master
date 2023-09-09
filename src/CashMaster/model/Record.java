@@ -72,12 +72,10 @@ public class Record {
   public static int getNewId(List<Record> records) {
     int id = 1;
     if (!records.isEmpty()) {
-      // Создайте список, содержащий все существующие ID.
       List<Integer> existingIds = records.stream()
           .map(Record::getId)
           .collect(Collectors.toList());
 
-      // Найдите минимальный доступный ID, начиная с 1.
       while (existingIds.contains(id)) {
         id++;
       }

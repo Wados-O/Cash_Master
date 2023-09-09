@@ -1,6 +1,5 @@
 package CashMaster.util;
 
-import CashMaster.model.Category;
 import CashMaster.model.Record;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
