@@ -217,7 +217,12 @@ public class RecordOperation {
     }
     return false;
   }
-
+  /**
+   * Converts an array of enumerations into an array of strings containing the names of each enumeration element.
+   *
+   * @param categories The array of enumerations to be converted into an array of strings.
+   * @return An array of strings containing the names of the enumeration elements.
+   */
   private static String[] getCategoryTitles(Enum<?>[] categories) {
     String[] categoryTitles = new String[categories.length];
     for (int i = 0; i < categories.length; i++) {
