@@ -128,6 +128,12 @@ public class RecordOperation {
     }
     System.out.println(FOOTER);
   }
+  /**
+   * Allows the user to edit a record in the application.
+   *
+   * @param scanner A Scanner object for user input.
+   * @throws ParseException If there is an error in parsing date input.
+   */
 
   public static void editRecord(Scanner scanner) throws ParseException {
     System.out.println("Edit record:");
@@ -209,7 +215,7 @@ public class RecordOperation {
     System.out.println("Record was changed.");
   }
   /**
-   * Checks if a given string represents an income category by comparing it with the titles of income categories.
+   * Checks if a given string represents an income category by comparing it with category titles.
    *
    * @param category The category string to be checked.
    * @return {@code true} if the provided category string matches any income category title; {@code false} otherwise.
