@@ -2,19 +2,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import CashMaster.model.Record;
 import CashMaster.util.FileUtil;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileUtilTest {
 private static final String testFile = "res/testRecord.csv";
+  private static final String SEP = ";;;";
   @BeforeEach
   void setUp(){
     File file = new File(testFile);
@@ -48,9 +53,39 @@ private static final String testFile = "res/testRecord.csv";
   }
 
   @Test
-  void saveToFile() {
-  }
+  void saveToFile() throws ParseException, IOException {
+    Date date1 = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.2023");
+    Date date2 = new SimpleDateFormat("dd.MM.yyyy").parse("02.01.2023");
+    Record record1 = new Record(1, "Food", "Lunch", 15.50, date1);
+    Record record2 = new Record(2, "Transport", "Buy fuel", 20.00, date2);
+    List<Record> recordsToSave = List.of(record1, record2);
+    String testFile = "test_record.csv";
 
+    FileUtil.setSaveFile(testFile);
+    FileUtil.saveToFile(recordsToSave);
+
+    List<Record> savedRecords = new ArrayList<>();
+    try (BufferedReader br = new BufferedReader(new FileReader(testFile))) {
+      String line;
+      while ((line = br.readLine()) != null) {
+        String[] parts = line.split(SEP);
+        if (parts.length == 5) {
+          int id = Integer.parseInt(parts[0]);
+          String category = parts[1];
+          String comment = parts[2];
+          double amount = Double.parseDouble(parts[3]);
+          Date date = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(parts[4]);
+          Record savedRecord = new Record(id, category, comment, amount, date);
+          savedRecords.add(savedRecord);
+        }
+      }
+    }
+
+    assertEquals(recordsToSave.size(), savedRecords.size());
+    for (int i = 0; i < recordsToSave.size(); i++) {
+      assertEquals(recordsToSave.get(i), savedRecords.get(i));
+    }
+  }
   @Test
   void setSaveFile() {
   }
