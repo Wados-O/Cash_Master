@@ -208,7 +208,12 @@ public class RecordOperation {
     records.set(indexToUpdate, recordToUpdate);
     System.out.println("Record was changed.");
   }
-
+  /**
+   * Checks if a given string represents an income category by comparing it with the titles of income categories.
+   *
+   * @param category The category string to be checked.
+   * @return {@code true} if the provided category string matches any income category title; {@code false} otherwise.
+   */
   private static boolean isIncomeCategory(String category) {
     for (CategoryIncome incomeCategory : CategoryIncome.values()) {
       if (incomeCategory.getTitle().equals(category)) {
