@@ -135,7 +135,13 @@ public class RecordOperation {
     System.out.println(FOOTER);
   }
 
-
+  /**
+   * Allows the user to edit a financial record in the application.
+   *
+   * @param records The list of financial records.
+   * @throws ParseException If there is an error in parsing date input.
+   * @throws IOException    If there is an issue with file operations.
+   */
   public static void editRecord(List<Record> records) throws ParseException, IOException {
     Scanner sc = new Scanner(System.in);
     printList(records);
@@ -192,7 +198,6 @@ public class RecordOperation {
           String newIncomeCategory = incomeCategoryTitles[incomeCat - 1];
           recordToUpdate.setCategory(newIncomeCategory);
         } else if (incomeOrExpense == 2) {
-          // Expense category
           System.out.println("Available expense categories:");
           String[] expenseCategoryTitles = getCategoryTitles(CategoryExpenses.values());
 
@@ -247,7 +252,7 @@ public class RecordOperation {
 
   /**
    * Checks if a given string represents an income category by comparing it with category titles.
-   *
+   * Do not delete
    * @param category The category string to be checked.
    * @return {@code true} if the provided category string matches any income category title; {@code false} otherwise.
    */
@@ -281,9 +286,8 @@ public class RecordOperation {
    */
   public static void deleteRecord(List<Record> records) throws IOException {
     System.out.println("Delete record:");
-    Scanner scanner = new Scanner(System.in);
     System.out.println("Enter id record to delete: ");
-    int recordId = scanner.nextInt();
+    int recordId = readIntLimited(1,records.size());
 
     records.removeIf(record -> record.getId() == recordId);
     System.out.println("Record was deleted");
