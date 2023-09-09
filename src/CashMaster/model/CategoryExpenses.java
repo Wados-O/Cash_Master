@@ -1,5 +1,8 @@
 package CashMaster.model;
 
+/**
+ * An enumeration representing various expense categories.
+ */
 public enum CategoryExpenses {
   FOOD(1,"Food"),
   GOODS(2, "Goods"),
@@ -17,6 +20,12 @@ public enum CategoryExpenses {
   private final int num;
   private String title;
 
+  /**
+   * Constructs a CategoryExpenses enum with a numeric identifier and a title.
+   *
+   * @param num   The numeric identifier of the expense category.
+   * @param title The title of the expense category.
+   */
   CategoryExpenses(int num, String title) {
     this.num = num;
     this.title = title;
