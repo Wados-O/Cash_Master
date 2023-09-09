@@ -1,5 +1,7 @@
 package CashMaster.model;
-
+/**
+ * An enumeration representing various income categories.
+ */
 public enum CategoryIncome {
   SALARY(1,"Salary"),
   FREELANCE(2,"Freelance"),
@@ -15,7 +17,12 @@ public enum CategoryIncome {
   ;
   private int num;
   private String title;
-
+  /**
+   * Constructs a CategoryIncome enum with a numeric identifier and a title.
+   *
+   * @param num   The numeric identifier of the income category.
+   * @param title The title of the income category.
+   */
   CategoryIncome(int num, String title) {
     this.num = num;
     this.title = title;
