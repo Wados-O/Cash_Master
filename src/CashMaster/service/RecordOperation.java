@@ -51,8 +51,8 @@ public class RecordOperation {
 
     System.out.println("RECORD ID: " + id);
     System.out.println(INCOME_OR_EXP);
-    String incOrExp = sc.nextLine();
-    if (incOrExp.equalsIgnoreCase("1")) {
+    int incOrExp = InputUtil.readIntLimited(1,2);
+    if (incOrExp == 1) {
       income = true;
     }
 
@@ -61,19 +61,19 @@ public class RecordOperation {
         System.out.println(category.getNum() + " " + category.getTitle());
       }
       System.out.print("Choose category from list (1-11): ");
-      int cat = Integer.parseInt(sc.nextLine());
+      int cat = InputUtil.readIntLimited(1,11);
       incomeCategory = CategoryExpenses.values()[cat - 1].getTitle();
     } else {
       for (CategoryIncome category : CategoryIncome.values()) {
         System.out.println(category.getNum() + " " + category.getTitle());
       }
       System.out.print("Choose category from list (1-9): ");
-      int cat = Integer.parseInt(sc.nextLine());
+      int cat = InputUtil.readIntLimited(1,9);
       incomeCategory = CategoryIncome.values()[cat - 1].getTitle();
     }
 
     System.out.println("Enter comment:");
-    String comment = sc.nextLine();
+    String comment = InputUtil.readStringLimited(3,40);
 
     System.out.println("Input amount:");
     double amount = Double.parseDouble(sc.nextLine());
