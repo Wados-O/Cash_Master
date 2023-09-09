@@ -1,11 +1,17 @@
 package CashMaster.service;
 
+import static CashMaster.util.InputUtil.readIntLimited;
+import static CashMaster.util.InputUtil.readStringLimited;
 import static CashMaster.view.Colors.RESET;
+import static CashMaster.view.MenuButton.EXIT_BUTTON;
 import static CashMaster.view.MenuButton.INCOME_OR_EXP;
+import static CashMaster.view.MenuButton.SHOW_CHANGE_MENU;
+import static CashMaster.view.MenuButton.SHOW_FINANCE;
 import static CashMaster.view.PrintTable.FOOTER;
 import static CashMaster.view.PrintTable.HEADER;
 import static CashMaster.view.PrintTable.MIDDLE;
 
+import CashMaster.controller.MenuController;
 import CashMaster.model.CategoryExpenses;
 import CashMaster.model.CategoryIncome;
 import CashMaster.model.Record;
@@ -51,7 +57,7 @@ public class RecordOperation {
 
     System.out.println("RECORD ID: " + id);
     System.out.println(INCOME_OR_EXP);
-    int incOrExp = InputUtil.readIntLimited(1,2);
+    int incOrExp = readIntLimited(1,2);
     if (incOrExp == 1) {
       income = true;
     }
@@ -61,19 +67,19 @@ public class RecordOperation {
         System.out.println(category.getNum() + " " + category.getTitle());
       }
       System.out.print("Choose category from list (1-11): ");
-      int cat = InputUtil.readIntLimited(1,11);
+      int cat = readIntLimited(1,11);
       incomeCategory = CategoryExpenses.values()[cat - 1].getTitle();
     } else {
       for (CategoryIncome category : CategoryIncome.values()) {
         System.out.println(category.getNum() + " " + category.getTitle());
       }
       System.out.print("Choose category from list (1-9): ");
-      int cat = InputUtil.readIntLimited(1,9);
+      int cat = readIntLimited(1,9);
       incomeCategory = CategoryIncome.values()[cat - 1].getTitle();
     }
 
     System.out.println("Enter comment:");
-    String comment = InputUtil.readStringLimited(3,40);
+    String comment = readStringLimited(3,40);
 
     System.out.println("Input amount:");
     double amount = Double.parseDouble(sc.nextLine());
@@ -130,13 +136,17 @@ public class RecordOperation {
   }
 
 
-  public static void editRecord(List<Record> records) throws ParseException {
+  public static void editRecord(List<Record> records) throws ParseException, IOException {
     Scanner sc = new Scanner(System.in);
+    printList(records);
+    System.out.println(SHOW_CHANGE_MENU);
+    System.out.println(SHOW_FINANCE);
+    System.out.println(EXIT_BUTTON);
     System.out.println("Edit record:");
 
     System.out.print("Enter id of record: ");
-    int recordId = sc.nextInt();
-    sc.nextLine(); // consume newline
+    int recordId = readIntLimited(1,records.size());
+
 
     Record recordToUpdate = null;
     int indexToUpdate = -1;
@@ -160,23 +170,17 @@ public class RecordOperation {
     System.out.println("Amount: " + recordToUpdate.getAmount());
     System.out.println("Date: " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate()));
 
-    System.out.println("Select what you want to edit:");
-    System.out.println("1. Category");
-    System.out.println("2. Comment");
-    System.out.println("3. Amount");
-    System.out.println("4. Date");
-    System.out.print("Enter your choice (1-4): ");
-    int choice = sc.nextInt();
-    sc.nextLine(); // consume newline
+
+    int choice = readIntLimited(1,6);
+
 
     switch (choice) {
       case 1:
-        System.out.println("Is it an income or an expense? (1 for income, 2 for expense): ");
-        int incomeOrExpense = sc.nextInt();
-        sc.nextLine(); // consume newline
+        System.out.println(INCOME_OR_EXP);
+        int incomeOrExpense = readIntLimited(1,2);
 
         if (incomeOrExpense == 1) {
-          // Income category
+
           System.out.println("Available income categories:");
           String[] incomeCategoryTitles = getCategoryTitles(CategoryIncome.values());
 
@@ -184,7 +188,7 @@ public class RecordOperation {
             System.out.println((i + 1) + " " + incomeCategoryTitles[i]);
           }
           System.out.print("Choose income category from list (1-" + incomeCategoryTitles.length + "): ");
-          int incomeCat = Integer.parseInt(sc.nextLine());
+          int incomeCat = readIntLimited(1,records.size());
           String newIncomeCategory = incomeCategoryTitles[incomeCat - 1];
           recordToUpdate.setCategory(newIncomeCategory);
         } else if (incomeOrExpense == 2) {
@@ -206,13 +210,13 @@ public class RecordOperation {
         break;
       case 2:
         System.out.print("Enter new comment: ");
-        String newComment = sc.nextLine();
+        String newComment = readStringLimited(1,40);
         recordToUpdate.setComment(newComment);
         break;
       case 3:
         System.out.print("Enter new amount: ");
         double newAmount = sc.nextDouble();
-        sc.nextLine(); // consume newline
+        sc.nextLine();
         recordToUpdate.setAmount(newAmount);
         break;
       case 4:
@@ -226,6 +230,11 @@ public class RecordOperation {
           return;
         }
         break;
+      case 5:
+        FileUtil.saveToFile(records);
+        break;
+      case 6:
+        MenuController.mainMenu(sc);
       default:
         System.out.println("Invalid choice.");
         return;
