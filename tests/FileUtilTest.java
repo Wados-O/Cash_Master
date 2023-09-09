@@ -20,6 +20,10 @@ import org.junit.jupiter.api.Test;
 class FileUtilTest {
 private static final String testFile = "res/testRecord.csv";
   private static final String SEP = ";;;";
+  /**
+   * This method is annotated with @BeforeEach, and it is executed before each test method.
+   * Its purpose is to set up the test environment and ensure a clean state before each test.
+   */
   @BeforeEach
   void setUp(){
     File file = new File(testFile);
@@ -28,7 +32,10 @@ private static final String testFile = "res/testRecord.csv";
     }
 
   }
-
+  /**
+   * This JUnit test case is designed to test the 'readFile' method of a financial records program.
+   * It checks whether the method correctly reads data from a file and populates a list of records.
+   */
   @Test
   void readFile() throws IOException , ParseException {
   String testCsvData =  "1;;;Food;;;Lunch;;;15.50;;;01.01.2023\n" +
@@ -51,7 +58,10 @@ private static final String testFile = "res/testRecord.csv";
     assertEquals(expectedDate, firstRecord.getDate());
 
   }
-
+  /**
+   * This JUnit test case is designed to test the 'saveToFile' method of a financial records program.
+   * It verifies whether the method correctly saves and reads records to/from a file.
+   */
   @Test
   void saveToFile() throws ParseException, IOException {
     Date date1 = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.2023");
@@ -85,12 +95,5 @@ private static final String testFile = "res/testRecord.csv";
     for (int i = 0; i < recordsToSave.size(); i++) {
       assertEquals(recordsToSave.get(i), savedRecords.get(i));
     }
-  }
-  @Test
-  void setSaveFile() {
-  }
-
-  @Test
-  void getRecords() {
   }
 }
