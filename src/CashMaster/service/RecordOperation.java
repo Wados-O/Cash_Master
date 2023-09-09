@@ -143,110 +143,120 @@ public class RecordOperation {
    * @throws IOException    If there is an issue with file operations.
    */
   public static void editRecord(List<Record> records) throws ParseException, IOException {
-    Scanner sc = new Scanner(System.in);
-    printList(records);
-    System.out.println(SHOW_CHANGE_MENU);
-    System.out.println(SHOW_FINANCE);
-    System.out.println(EXIT_BUTTON);
-    System.out.println("Edit record:");
+    while (true) {
+      Scanner sc = new Scanner(System.in);
+      printList(records);
+      System.out.println(SHOW_CHANGE_MENU);
+      System.out.println();
+      System.out.println(SHOW_FINANCE);
+      System.out.println();
+      System.out.println(EXIT_BUTTON);
+      System.out.println("Edit record:");
 
-    System.out.print("Enter id of record: ");
-    int recordId = readIntLimited(1,records.size());
+      System.out.print("Enter id of record: ");
+      int recordId = readIntLimited(1, records.size());
 
+      Record recordToUpdate = null;
+      int indexToUpdate = -1;
 
-    Record recordToUpdate = null;
-    int indexToUpdate = -1;
-
-    for (int i = 0; i < records.size(); i++) {
-      if (records.get(i).getId() == recordId) {
-        recordToUpdate = records.get(i);
-        indexToUpdate = i;
-        break;
+      for (int i = 0; i < records.size(); i++) {
+        if (records.get(i).getId() == recordId) {
+          recordToUpdate = records.get(i);
+          indexToUpdate = i;
+          break;
+        }
       }
-    }
 
-    if (recordToUpdate == null) {
-      System.out.println("Not found record.");
-      return;
-    }
+      if (recordToUpdate == null) {
+        System.out.println("Not found record.");
+        return;
+      }
 
-    System.out.println("Current record:");
-    System.out.println("Category: " + recordToUpdate.getCategory());
-    System.out.println("Comment: " + recordToUpdate.getComment());
-    System.out.println("Amount: " + recordToUpdate.getAmount());
-    System.out.println("Date: " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate()));
+      printList(records);
+      System.out.println(SHOW_CHANGE_MENU);
+      System.out.println();
+      System.out.println(SHOW_FINANCE);
+      System.out.println();
+      System.out.println(EXIT_BUTTON);
+      System.out.println("What would you like to change:");
+      System.out.println("Category: " + recordToUpdate.getCategory());
+      System.out.println("Comment: " + recordToUpdate.getComment());
+      System.out.println("Amount: " + recordToUpdate.getAmount());
+      System.out.println(
+          "Date: " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate()));
 
+      int choice = readIntLimited(1, 6);
 
-    int choice = readIntLimited(1,6);
+      switch (choice) {
+        case 1:
+          System.out.println(INCOME_OR_EXP);
+          int incomeOrExpense = readIntLimited(1, 2);
 
+          if (incomeOrExpense == 1) {
 
-    switch (choice) {
-      case 1:
-        System.out.println(INCOME_OR_EXP);
-        int incomeOrExpense = readIntLimited(1,2);
+            System.out.println("Available income categories:");
+            String[] incomeCategoryTitles = getCategoryTitles(CategoryIncome.values());
 
-        if (incomeOrExpense == 1) {
+            for (int i = 0; i < incomeCategoryTitles.length; i++) {
+              System.out.println((i + 1) + " " + incomeCategoryTitles[i]);
+            }
+            System.out.print(
+                "Choose income category from list (1-" + incomeCategoryTitles.length + "): ");
+            int incomeCat = readIntLimited(1, records.size());
+            String newIncomeCategory = incomeCategoryTitles[incomeCat - 1];
+            recordToUpdate.setCategory(newIncomeCategory);
+          } else if (incomeOrExpense == 2) {
+            System.out.println("Available expense categories:");
+            String[] expenseCategoryTitles = getCategoryTitles(CategoryExpenses.values());
 
-          System.out.println("Available income categories:");
-          String[] incomeCategoryTitles = getCategoryTitles(CategoryIncome.values());
-
-          for (int i = 0; i < incomeCategoryTitles.length; i++) {
-            System.out.println((i + 1) + " " + incomeCategoryTitles[i]);
+            for (int i = 0; i < expenseCategoryTitles.length; i++) {
+              System.out.println((i + 1) + " " + expenseCategoryTitles[i]);
+            }
+            System.out.print(
+                "Choose expense category from list (1-" + expenseCategoryTitles.length + "): ");
+            int expenseCat = Integer.parseInt(sc.nextLine());
+            String newExpenseCategory = expenseCategoryTitles[expenseCat - 1];
+            recordToUpdate.setCategory(newExpenseCategory);
+          } else {
+            System.out.println("Invalid choice.");
+            return;
           }
-          System.out.print("Choose income category from list (1-" + incomeCategoryTitles.length + "): ");
-          int incomeCat = readIntLimited(1,records.size());
-          String newIncomeCategory = incomeCategoryTitles[incomeCat - 1];
-          recordToUpdate.setCategory(newIncomeCategory);
-        } else if (incomeOrExpense == 2) {
-          System.out.println("Available expense categories:");
-          String[] expenseCategoryTitles = getCategoryTitles(CategoryExpenses.values());
-
-          for (int i = 0; i < expenseCategoryTitles.length; i++) {
-            System.out.println((i + 1) + " " + expenseCategoryTitles[i]);
+          break;
+        case 2:
+          System.out.print("Enter new comment: ");
+          String newComment = readStringLimited(1, 40);
+          recordToUpdate.setComment(newComment);
+          break;
+        case 3:
+          System.out.print("Enter new amount: ");
+          double newAmount = sc.nextDouble();
+          sc.nextLine();
+          recordToUpdate.setAmount(newAmount);
+          break;
+        case 4:
+          System.out.print("Enter new date (dd.MM.yyyy): ");
+          String newDateStr = sc.nextLine();
+          Date newDate = DateUtil.parseStrToDate(newDateStr);
+          if (newDate != null) {
+            recordToUpdate.setDate(newDate);
+          } else {
+            System.out.println("Invalid date format. No changes were made.");
+            return;
           }
-          System.out.print("Choose expense category from list (1-" + expenseCategoryTitles.length + "): ");
-          int expenseCat = Integer.parseInt(sc.nextLine());
-          String newExpenseCategory = expenseCategoryTitles[expenseCat - 1];
-          recordToUpdate.setCategory(newExpenseCategory);
-        } else {
+          break;
+        case 5:
+          FileUtil.saveToFile(records);
+          break;
+        case 6:
+          MenuController.mainMenu(sc);
+        default:
           System.out.println("Invalid choice.");
           return;
-        }
-        break;
-      case 2:
-        System.out.print("Enter new comment: ");
-        String newComment = readStringLimited(1,40);
-        recordToUpdate.setComment(newComment);
-        break;
-      case 3:
-        System.out.print("Enter new amount: ");
-        double newAmount = sc.nextDouble();
-        sc.nextLine();
-        recordToUpdate.setAmount(newAmount);
-        break;
-      case 4:
-        System.out.print("Enter new date (dd.MM.yyyy): ");
-        String newDateStr = sc.nextLine();
-        Date newDate = DateUtil.parseStrToDate(newDateStr);
-        if (newDate != null) {
-          recordToUpdate.setDate(newDate);
-        } else {
-          System.out.println("Invalid date format. No changes were made.");
-          return;
-        }
-        break;
-      case 5:
-        FileUtil.saveToFile(records);
-        break;
-      case 6:
-        MenuController.mainMenu(sc);
-      default:
-        System.out.println("Invalid choice.");
-        return;
-    }
+      }
 
-    records.set(indexToUpdate, recordToUpdate);
-    System.out.println("Record was changed.");
+      records.set(indexToUpdate, recordToUpdate);
+      System.out.println("Record was changed.");
+    }
   }
 
 
