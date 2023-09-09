@@ -66,7 +66,13 @@ public class MenuController {
       }
     }
   }
-
+  /**
+   * Displays a menu for sorting records and performs sorting operations based on user input.
+   *
+   * @param sc A Scanner object for user input.
+   * @throws IOException If there is an I/O error while reading or writing data.
+   * @throws ParseException If there is an error in parsing date input.
+   */
   public static void sortRecords(Scanner sc) throws IOException, ParseException {
 
     while (true) {
