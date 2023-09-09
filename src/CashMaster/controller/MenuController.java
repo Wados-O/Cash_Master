@@ -48,7 +48,7 @@ public class MenuController {
           RecordOperation.addRecord(records);
           break;
         case 2:
-          RecordOperation.editRecord(sc);
+          RecordOperation.editRecord(records);
           break;
         case 3:
           RecordOperation.deleteRecord(records);
