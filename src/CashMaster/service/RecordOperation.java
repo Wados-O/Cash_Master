@@ -132,27 +132,19 @@ public class RecordOperation {
 
   public static void editRecord(List<Record> records) throws ParseException {
     Scanner sc = new Scanner(System.in);
-    DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
-    Calendar today = Calendar.getInstance();
-    Date currentDate = today.getTime();
-    Date stDate = currentDate;
     System.out.println("Edit record:");
 
     System.out.print("Enter id of record: ");
     int recordId = sc.nextInt();
-    printList(records);
-    System.out.println(MenuButton.SHOW_CHANGE_MENU);
+    sc.nextLine(); // consume newline
+
     Record recordToUpdate = null;
     int indexToUpdate = -1;
-
-    boolean income = false;
 
     for (int i = 0; i < records.size(); i++) {
       if (records.get(i).getId() == recordId) {
         recordToUpdate = records.get(i);
         indexToUpdate = i;
-        income = isIncomeCategory(recordToUpdate.getCategory());
         break;
       }
     }
@@ -168,76 +160,81 @@ public class RecordOperation {
     System.out.println("Amount: " + recordToUpdate.getAmount());
     System.out.println("Date: " + new SimpleDateFormat("dd.MM.yyyy").format(recordToUpdate.getDate()));
 
-    System.out.print("Is it an income or an expense? (1 for income, 2 for expense): ");
-    int incomeOrExpense = sc.nextInt();
-    sc.nextLine();
-    if (incomeOrExpense == 1) {
-      // It's income, provide income categories
-      System.out.println("Available income categories:");
-      String[] incomeCategoryTitles = getCategoryTitles(CategoryIncome.values());
+    System.out.println("Select what you want to edit:");
+    System.out.println("1. Category");
+    System.out.println("2. Comment");
+    System.out.println("3. Amount");
+    System.out.println("4. Date");
+    System.out.print("Enter your choice (1-4): ");
+    int choice = sc.nextInt();
+    sc.nextLine(); // consume newline
 
-      for (int i = 0; i < incomeCategoryTitles.length; i++) {
-        System.out.println((i + 1) + " " + incomeCategoryTitles[i]);
-      }
+    switch (choice) {
+      case 1:
+        System.out.println("Is it an income or an expense? (1 for income, 2 for expense): ");
+        int incomeOrExpense = sc.nextInt();
+        sc.nextLine(); // consume newline
 
-      System.out.print("Choose an income category from the list (1-" + incomeCategoryTitles.length + "): ");
-      int incomeCategoryChoice = Integer.parseInt(sc.nextLine());
+        if (incomeOrExpense == 1) {
+          // Income category
+          System.out.println("Available income categories:");
+          String[] incomeCategoryTitles = getCategoryTitles(CategoryIncome.values());
 
-      String newIncomeCategory = incomeCategoryTitles[incomeCategoryChoice - 1];
-      recordToUpdate.setCategory(newIncomeCategory);
-      recordToUpdate.setAmount(Math.abs(recordToUpdate.getAmount())); // Make sure the amount is positive for income
-    } else if (incomeOrExpense == 2) {
-      // It's expense, provide expense categories
-      System.out.println("Available expense categories:");
-      String[] expenseCategoryTitles = getCategoryTitles(CategoryExpenses.values());
+          for (int i = 0; i < incomeCategoryTitles.length; i++) {
+            System.out.println((i + 1) + " " + incomeCategoryTitles[i]);
+          }
+          System.out.print("Choose income category from list (1-" + incomeCategoryTitles.length + "): ");
+          int incomeCat = Integer.parseInt(sc.nextLine());
+          String newIncomeCategory = incomeCategoryTitles[incomeCat - 1];
+          recordToUpdate.setCategory(newIncomeCategory);
+        } else if (incomeOrExpense == 2) {
+          // Expense category
+          System.out.println("Available expense categories:");
+          String[] expenseCategoryTitles = getCategoryTitles(CategoryExpenses.values());
 
-      for (int i = 0; i < expenseCategoryTitles.length; i++) {
-        System.out.println((i + 1) + " " + expenseCategoryTitles[i]);
-      }
-
-      System.out.print("Choose an expense category from the list (1-" + expenseCategoryTitles.length + "): ");
-      int expenseCategoryChoice = Integer.parseInt(sc.nextLine());
-
-      String newExpenseCategory = expenseCategoryTitles[expenseCategoryChoice - 1];
-      recordToUpdate.setCategory(newExpenseCategory);
-      recordToUpdate.setAmount(-Math.abs(recordToUpdate.getAmount())); // Make sure the amount is negative for expenses
-    } else {
-      System.out.println("Invalid choice.");
-      return;
-    }
-
-    System.out.println("Enter new comment: ");
-    String newComment = sc.nextLine();
-    recordToUpdate.setComment(newComment);
-
-    System.out.print("Enter new amount (or press Enter to leave it unchanged): ");
-    String newAmountStr = sc.nextLine();
-
-    if (!newAmountStr.isEmpty()) {
-      try {
-        double newAmount = Double.parseDouble(newAmountStr);
+          for (int i = 0; i < expenseCategoryTitles.length; i++) {
+            System.out.println((i + 1) + " " + expenseCategoryTitles[i]);
+          }
+          System.out.print("Choose expense category from list (1-" + expenseCategoryTitles.length + "): ");
+          int expenseCat = Integer.parseInt(sc.nextLine());
+          String newExpenseCategory = expenseCategoryTitles[expenseCat - 1];
+          recordToUpdate.setCategory(newExpenseCategory);
+        } else {
+          System.out.println("Invalid choice.");
+          return;
+        }
+        break;
+      case 2:
+        System.out.print("Enter new comment: ");
+        String newComment = sc.nextLine();
+        recordToUpdate.setComment(newComment);
+        break;
+      case 3:
+        System.out.print("Enter new amount: ");
+        double newAmount = sc.nextDouble();
+        sc.nextLine(); // consume newline
         recordToUpdate.setAmount(newAmount);
-      } catch (NumberFormatException e) {
-        System.out.println("Invalid input. Please enter a valid number for the amount.");
-      }
-    } else {
-      System.out.println("Amount was left unchanged.");
-    }
-    System.out.println("Current date: " + dateFormat.format(currentDate));
-    System.out.print("Input Date or 'ENTER' for current date (dd.MM.yyyy): ");
-    String startDate = sc.nextLine();
-    if (!startDate.isEmpty()) {
-      try {
-        stDate = dateFormat.parse(startDate);
-      } catch (ParseException e) {
-        System.out.println("Invalid date format. Please use dd.MM.yyyy format.");
+        break;
+      case 4:
+        System.out.print("Enter new date (dd.MM.yyyy): ");
+        String newDateStr = sc.nextLine();
+        Date newDate = DateUtil.parseStrToDate(newDateStr);
+        if (newDate != null) {
+          recordToUpdate.setDate(newDate);
+        } else {
+          System.out.println("Invalid date format. No changes were made.");
+          return;
+        }
+        break;
+      default:
+        System.out.println("Invalid choice.");
         return;
-      }
     }
 
     records.set(indexToUpdate, recordToUpdate);
     System.out.println("Record was changed.");
   }
+
 
   /**
    * Checks if a given string represents an income category by comparing it with category titles.
