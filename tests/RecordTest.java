@@ -30,4 +30,16 @@ class RecordTest {
   }
 
 
+  @Test
+  void testGetId(){
+    Record record = new Record(1);
+    assertEquals(1,record.getId());
+  }
+  @Test
+  void testGetCategory(){
+    Record record = new Record();
+    record.setCategory("Food");
+    assertEquals("Food",record.getCategory());
+  }
+
 }
