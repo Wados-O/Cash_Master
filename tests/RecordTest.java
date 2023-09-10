@@ -47,5 +47,11 @@ class RecordTest {
     record.setComment("Lunch");
     assertEquals("Lunch",record.getComment());
   }
+  @Test
+  void testGetAmount(){
+    Record record = new Record();
+    record.setAmount(15.50);
+    assertEquals(15.50,record.getAmount());
+  }
 
 }
