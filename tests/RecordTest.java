@@ -41,5 +41,11 @@ class RecordTest {
     record.setCategory("Food");
     assertEquals("Food",record.getCategory());
   }
+  @Test
+  void testGetComment(){
+    Record record = new Record();
+    record.setComment("Lunch");
+    assertEquals("Lunch",record.getComment());
+  }
 
 }
