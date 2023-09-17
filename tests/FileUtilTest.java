@@ -69,7 +69,7 @@ private static final String testFile = "res/testRecord.csv";
     Record record1 = new Record(1, "Food", "Lunch", 15.50, date1);
     Record record2 = new Record(2, "Transport", "Buy fuel", 20.00, date2);
     List<Record> recordsToSave = List.of(record1, record2);
-    String testFile = "test_record.csv";
+    String testFile = "res/test_record.csv";
 
     FileUtil.setSaveFile(testFile);
     FileUtil.saveToFile(recordsToSave);
