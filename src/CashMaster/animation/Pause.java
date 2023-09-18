@@ -11,4 +11,10 @@ public class Pause {
         long start = System.currentTimeMillis();
         while (start >= System.currentTimeMillis() - pause);
     }
+    public static void shortPause(){
+        int pause = 200;
+        long start = System.currentTimeMillis();
+        while (start >= System.currentTimeMillis() - pause);
+    }
+
 }
