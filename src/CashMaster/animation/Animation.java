@@ -7,7 +7,7 @@ import static CashMaster.animation.Pause.longPause;
 public class Animation {
     public static void animation() {
         logoWados();
-        longPause();
+
         slowlyClean();
         stringPresent();
         slowlyClean();
